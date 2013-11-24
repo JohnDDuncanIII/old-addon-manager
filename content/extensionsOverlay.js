@@ -17,7 +17,7 @@ var oamObject = {
   },
 
   init : function oamInit(){
-    this.updateSearchPanel();
+    this.updateSearchPanel;
     window.removeEventListener("load", this.init);
   },
 

@@ -18,3 +18,4 @@ override chrome://mozapps/skin/extensions/extensions.css chrome://$NAME/skin/ext
 
 #Locales
 locale $NAME en-US locale/en-US/
+locale $NAME ru    locale/ru/
