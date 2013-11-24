@@ -1,1 +1,1 @@
-Old Addon Manager (OAM) aims to mimick Firefox 3.6 Add-on Manager as closely as possible.
+Old Addon Manager (OAM) aims to mimic Firefox 3.6 Add-on Manager as closely as possible.
