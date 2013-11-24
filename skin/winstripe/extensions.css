@@ -247,6 +247,10 @@
   background-color: ThreeDHighlight;
 }
 
+#search-panel {
+  margin: 10px 10px -6px;
+}
+
 /*** sorters ***/
 
 .sort-controls {

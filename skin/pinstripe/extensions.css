@@ -119,6 +119,7 @@
   border-bottom: 2px groove ThreeDFace;
   background-color: -moz-Field;
   color: -moz-FieldText;
+  -moz-box-align: center;
 }
 
 .category {
@@ -157,44 +158,8 @@
 }
 
 .category-icon {
-  width: 32px;
-  height: 32px;
+  display: none;
 }
-
-#category-search > .category-icon {
-  list-style-image: url("chrome://mozapps/skin/extensions/category-search.png");
-}
-#category-discover > .category-icon {
-  list-style-image: url("chrome://mozapps/skin/extensions/category-discover.png");
-}
-#category-locale > .category-icon {
-  list-style-image: url("chrome://mozapps/skin/extensions/category-languages.png");
-}
-#category-searchengine > .category-icon {
-  list-style-image: url("chrome://mozapps/skin/extensions/category-searchengines.png");
-}
-#category-extension > .category-icon {
-  list-style-image: url("chrome://mozapps/skin/extensions/category-extensions.png");
-}
-#category-service > .category-icon {
-  list-style-image: url("chrome://mozapps/skin/extensions/category-service.png");
-}
-#category-theme > .category-icon {
-  list-style-image: url("chrome://mozapps/skin/extensions/category-themes.png");
-}
-#category-plugin > .category-icon {
-  list-style-image: url("chrome://mozapps/skin/extensions/category-plugins.png");
-}
-#category-dictionary > .category-icon {
-  list-style-image: url("chrome://mozapps/skin/extensions/category-dictionaries.png");
-}
-#category-availableUpdates > .category-icon {
-  list-style-image: url("chrome://mozapps/skin/extensions/category-available.png");
-}
-#category-recentUpdates > .category-icon {
-  list-style-image: url("chrome://mozapps/skin/extensions/category-recent.png");
-}
-
 
 /*** header ***/
 
@@ -245,6 +210,10 @@
   padding: 4px;
   min-height: 41px;
   background-color: ThreeDHighlight;
+}
+
+#search-panel {
+  margin: 10px 10px -6px;
 }
 
 /*** sorters ***/
@@ -311,7 +280,7 @@
   -moz-padding-start: 7px;
   -moz-padding-end: 7px;
   min-height: 25px;
-  border-bottom: 1px dotted #C0C0C0;
+  border-bottom: 1px solid #C0C0C0;
 }
 
 .addon[selected] .text-link,
@@ -456,17 +425,11 @@
 }
 
 .addon-view[selected] {
-  background-color: -moz-cellhighlight;
-  color: -moz-cellhighlighttext;
-}
-
-.list:focus .addon-view[selected] {
-  background-image: url("chrome://$NAME/skin/itemEnabledFader.png");
   background-color: Highlight;
   color: HighlightText;
 }
 
-.list:focus .addon-view[selected][active="false"] {
+.addon-view[selected][active="false"] {
   background-image: url("chrome://$NAME/skin/itemDisabledFader.png");
 }
 
