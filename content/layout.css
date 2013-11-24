@@ -47,6 +47,7 @@
   visibility: collapse;
 }
 
-.disabled-postfix {
+.disabled-postfix,
+.details.button-link {
   visibility: collapse;
 }
