@@ -184,67 +184,25 @@
 
 /*** header ***/
 
-#header {
+#commandBarBottom {
   margin: 10px 10px 5px 10px;
   min-width: 1px;
 }
 
-.nav-button {
-  min-width: 0;
-}
-
-#back-btn:-moz-locale-dir(ltr) {
-  list-style-image: url("moz-icon://stock/gtk-go-back-ltr?size=toolbar");
-}
-
-#forward-btn:-moz-locale-dir(ltr) {
-  list-style-image: url("moz-icon://stock/gtk-go-forward-ltr?size=toolbar");
-}
-
-#back-btn:-moz-locale-dir(rtl) {
-  list-style-image: url("moz-icon://stock/gtk-go-back-rtl?size=toolbar");
-}
-
-#forward-btn:-moz-locale-dir(rtl) {
-  list-style-image: url("moz-icon://stock/gtk-go-forward-rtl?size=toolbar");
-}
-
-#back-btn[disabled="true"]:-moz-locale-dir(ltr) {
-  list-style-image: url("moz-icon://stock/gtk-go-back-ltr?size=toolbar&state=disabled");
-}
-
-#forward-btn[disabled="true"]:-moz-locale-dir(ltr) {
-  list-style-image: url("moz-icon://stock/gtk-go-forward-ltr?size=toolbar&state=disabled");
-}
-
-#back-btn[disabled="true"]:-moz-locale-dir(rtl) {
-  list-style-image: url("moz-icon://stock/gtk-go-back-rtl?size=toolbar&state=disabled");
-}
-
-#forward-btn[disabled="true"]:-moz-locale-dir(rtl) {
-  list-style-image: url("moz-icon://stock/gtk-go-forward-rtl?size=toolbar&state=disabled");
-}
-
-#header-utils-btn {
-  min-width: 4.5em;
-}
-
-#header-utils-btn .toolbarbutton-icon {
-  list-style-image: url("moz-icon://stock/gtk-preferences?size=toolbar");
-}
-
-#header-utils-btn:-moz-focusring > .button-box {
-  border: none;
-}
-
-#header-search {
+#commandBarBottom button {
   margin: 0;
+  -moz-margin-end: 5px;
 }
 
-@media (max-width: 600px) {
-  #header-search {
-    width: 12em;
-  }
+#resizerBox {
+  margin-top: -12px;
+  visibility: hidden;
+}
+
+#resizerBox > resizer {
+  height: 10px;
+  max-height: 10px;
+  visibility: visible;
 }
 
 .view-header {
@@ -257,6 +215,10 @@
 
 #search-panel {
   margin: 8px 8px -6px;
+}
+
+#browseAddons {
+  text-decoration: underline;
 }
 
 /*** sorters ***/

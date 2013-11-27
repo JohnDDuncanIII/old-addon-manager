@@ -10,6 +10,10 @@
   -moz-box-ordinal-group: 10 !important;
 }
 
+#header{
+  visibility: collapse;
+}
+
 .category {
   -moz-box-orient: vertical !important;
 }

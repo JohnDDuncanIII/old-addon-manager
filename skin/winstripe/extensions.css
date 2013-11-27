@@ -198,39 +198,25 @@
 
 /*** header ***/
 
-#header {
+#commandBarBottom {
   margin: 10px 10px 5px 10px;
   min-width: 1px;
 }
 
-.nav-button {
-  min-width: 0;
-  list-style-image: url("chrome://mozapps/skin/extensions/navigation.png");
-}
-
-#back-btn:-moz-locale-dir(ltr),
-#forward-btn:-moz-locale-dir(rtl) {
-  -moz-image-region: rect(0, 18px, 18px, 0);
-}
-#back-btn:-moz-locale-dir(rtl),
-#forward-btn:-moz-locale-dir(ltr) {
-  -moz-image-region: rect(0, 36px, 18px, 18px);
-}
-
-#header-utils-btn {
-  min-width: 4.5em;
-}
-
-#header-utils-btn .toolbarbutton-icon {
-  list-style-image: url("chrome://mozapps/skin/extensions/utilities.png");
-}
-
-#header-utils-btn:-moz-focusring > .button-box {
-  border: none;
-}
-
-#header-search {
+#commandBarBottom button {
   margin: 0;
+  -moz-margin-end: 5px;
+}
+
+#resizerBox {
+  margin-top: -12px;
+  visibility: hidden;
+}
+
+#resizerBox > resizer {
+  height: 10px;
+  max-height: 10px;
+  visibility: visible;
 }
 
 @media (max-width: 600px) {

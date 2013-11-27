@@ -30,5 +30,49 @@
                value="&browseAddons.label;"
                onclick="if (event.button == 0) { oamObject.browseAddons(); }"/>
       </hbox>
+      <hbox id="commandBarBottom" align="center">
+<!--        <button id="showUpdateInfoButton" label="&cmd.showUpdateInfo.label;"
+                accesskey="&cmd.showUpdateInfo.accesskey;"
+                tooltiptext="&cmd.showUpdateInfo.tooltip;"
+                command="cmd_showUpdateInfo"/>
+        <button id="hideUpdateInfoButton" label="&cmd.hideUpdateInfo.label;"
+                accesskey="&cmd.hideUpdateInfo.accesskey;"
+                tooltiptext="&cmd.hideUpdateInfo.tooltip;"
+                command="cmd_hideUpdateInfo"/>
+        <button id="installFileButton" label="&cmd.installLocalFile.label;"
+                accesskey="&cmd.installLocalFile.accesskey;"
+                tooltiptextaddons="&cmd.installFileAddon.tooltip;"
+                tooltiptextthemes="&cmd.installFileTheme.tooltip;"
+                command="cmd_installFile"/>
+        <button id="checkUpdatesAllButton" label="&cmd.checkUpdatesAll.label;"
+                accesskey="&cmd.checkUpdatesAll.accesskey;"
+                tooltiptextaddons="&cmd.checkUpdatesAllAddon.tooltip;"
+                tooltiptextthemes="&cmd.checkUpdatesAllTheme.tooltip;"
+                tooltiptextplugins="&cmd.checkUpdatesAllPlugin.tooltip;"
+                command="cmd_checkUpdatesAll"/>
+        <label id="getMore" class="text-link"
+               onclick="if (event.button == 0) { openURL(this.getAttribute('getMoreURL')); }"
+               valuethemes="&getThemes.label;"
+               valueplugins="&getPlugins.label;"
+               valueextensions="&getExtensions.label;"/>
+        <spacer flex="1"/>
+        <button id="skipDialogButton" label="&cmd.skip.label;"
+                accesskey="&cmd.skip.accesskey;"
+                tooltiptext="&cmd.skip.tooltip;"
+                command="cmd_close"/>
+        <button id="continueDialogButton" label="&cmd.continue.label;"
+                accesskey="&cmd.continue.accesskey;"
+                tooltiptext="&cmd.continue.tooltip;"
+                command="cmd_continue"
+                hidden="true"/>
+        <button id="installUpdatesAllButton" label="&cmd.installUpdatesAll2.label;"
+                accesskey="&cmd.installUpdatesAll2.accesskey;"
+                tooltiptext="&cmd.installUpdatesAll2.tooltip;"
+                command="cmd_installUpdatesAll"/>-->
+      </hbox>
+      <hbox id="resizerBox" style="min-width:1px;">
+        <spacer flex="1"/>
+        <resizer dir="bottomend"/>
+      </hbox>
     </box>
 </overlay>
