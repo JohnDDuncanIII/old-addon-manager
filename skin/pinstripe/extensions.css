@@ -113,33 +113,33 @@
 /*** category selector ***/
 
 #categories {
-  -moz-appearance: none;
-  margin: -2px -2px 0;
-  -moz-padding-start: 10px;
-  border-bottom: 2px groove ThreeDFace;
-  background-color: -moz-Field;
+  -moz-appearance: toolbar;
+  padding: 4px 0 9px !important;
+  margin: 0  !important;
   color: -moz-FieldText;
   -moz-box-align: center;
+  -moz-box-pack: center;
+  border: none !important;
 }
 
 .category {
-  min-width: 4.5em;
-  margin: 0px 1px 0px 1px;
-  padding: 7px 3px 1px;
+  -moz-box-orient: vertical;
+  -moz-box-align: center;
+  -moz-appearance: toolbarbutton;
+  font: menu;
+  text-shadow: @loweredShadow@;
+  margin: 0;
+  padding: 0 1px;
+  height: 22px;
 }
 
 .category[disabled] {
   visibility: collapse !important;
 }
 
-.category:hover {
-  background-color: #E0E8F6;
-  color: black;
-}
-
 .category[selected="true"] {
-  background-color: #C1D2EE;
-  color: black;
+  color: #FFF !important;
+  text-shadow: rgba(0, 0, 0, 0.4) 0 1px;
 }
 
 .category-badge {
@@ -163,57 +163,41 @@
 
 /*** header ***/
 
-#header {
-  margin: 10px 10px 5px 10px;
+#commandBarBottom {
+  margin: 10px 10px 10px 10px;
   min-width: 1px;
+  -moz-appearance: dialog;
 }
 
-.nav-button {
-  min-width: 0;
-  list-style-image: url("chrome://mozapps/skin/extensions/navigation.png");
-}
-
-#back-btn:-moz-locale-dir(ltr),
-#forward-btn:-moz-locale-dir(rtl) {
-  -moz-image-region: rect(0, 18px, 18px, 0);
-}
-#back-btn:-moz-locale-dir(rtl),
-#forward-btn:-moz-locale-dir(ltr) {
-  -moz-image-region: rect(0, 36px, 18px, 18px);
-}
-
-#header-utils-btn {
-  min-width: 4.5em;
-}
-
-#header-utils-btn .toolbarbutton-icon {
-  list-style-image: url("chrome://mozapps/skin/extensions/utilities.png");
-}
-
-#header-utils-btn:-moz-focusring > .button-box {
-  border: none;
-}
-
-#header-search {
+#commandBarBottom button {
   margin: 0;
+  -moz-margin-end: 5px;
 }
 
-@media (max-width: 600px) {
-  #header-search {
-    width: 12em;
-  }
+#resizerBox {
+  margin-top: -12px;
+  visibility: hidden !important;
+}
+
+#resizerBox > resizer {
+  height: 10px;
+  max-height: 10px;
+  visibility: visible !important
 }
 
 .view-header {
-  border: 1px solid ThreeDShadow;
-  margin: 10px 10px 0;
+  borde-bottom: 1px solid ThreeDShadow;
   padding: 4px;
   min-height: 41px;
   background-color: ThreeDHighlight;
 }
 
 #search-panel {
-  margin: 10px 10px -6px;
+  border-bottom: 1px solid #878787;
+}
+
+#browseAddons {
+  text-decoration: underline;
 }
 
 /*** sorters ***/
@@ -270,8 +254,9 @@
 /*** list ***/
 
 .list, #discover-view, #detail-view {
-  -moz-appearance: listbox;
-  margin: 10px 10px 0;
+  margin: 0 !important;
+  -moz-appearance: none;
+  border-bottom: 1px solid #878787;
 }
 
 .addon {
@@ -505,8 +490,7 @@
 /*** search view ***/
 
 #search-filter {
-  -moz-appearance: listbox;
-  margin: 10px 10px 0px;
+  margin: 0px;
   padding: 5px 20px;
   font-size: 100%;
   overflow-x: hidden;
