@@ -2,4 +2,22 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
+<!ENTITY em.width                         "630">
+<!ENTITY em.height                        "380">
+
 <!ENTITY browseAddons.label               "Обзор всех дополнений">
+
+<!ENTITY cmd.checkUpdatesAll.label        "Найти обновления">
+<!ENTITY cmd.checkUpdatesAll.accesskey    "а">
+<!ENTITY cmd.checkUpdatesAllAddon.tooltip "Производит поиск обновлений для ваших дополнений">
+<!ENTITY cmd.checkUpdatesAllTheme.tooltip "Производит поиск обновлений для ваших тем">
+<!ENTITY cmd.checkUpdatesAllPlugin.tooltip "Производит поиск обновлений для ваших плагинов">
+
+<!ENTITY cmd.installLocalFile.label       "Установить…">
+<!ENTITY cmd.installLocalFile.accesskey   "с">
+<!ENTITY cmd.installFileAddon.tooltip     "Установить дополнение">
+<!ENTITY cmd.installFileTheme.tooltip     "Установить тему">
+
+<!ENTITY getExtensions.label              "Загрузить расширения">
+<!ENTITY getThemes.label                  "Загрузить темы">
+<!ENTITY getPlugins.label                 "Загрузить плагины">

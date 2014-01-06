@@ -7,6 +7,7 @@ cp install.rdf temp
 cp content temp -r
 cp locale temp -r
 cp skin temp -r
+cp defaults temp -r
 
 cd temp
 

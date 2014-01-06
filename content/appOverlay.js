@@ -13,8 +13,10 @@ function toEM(aPane) {
     return;
   }
 
+  var width = oamEmDimensions.width;
+  var height = oamEmDimensions.height;
   const EMURL = "chrome://mozapps/content/extensions/extensions.xul";
-  const EMFEATURES = "all,dialog=no,height=380,width=720";
+  const EMFEATURES = "all,dialog=no,height="+height+",width="+width;
   if (aPane)
     window.openDialog(EMURL, "", EMFEATURES, aPane);
   else

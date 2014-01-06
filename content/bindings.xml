@@ -46,7 +46,7 @@
     <content>
       <children includes="listheader"/>
       <xul:scrollbox allowevents="true" orient="horizontal" anonid="main-box"
-                     flex="1" style="overflow-x: auto; overflow-y: hidden;" xbl:inherits="dir,pack">
+                     flex="1" style="overflow: hidden;" xbl:inherits="dir,pack">
         <children/>
       </xul:scrollbox>
     </content>
