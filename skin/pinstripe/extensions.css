@@ -196,10 +196,6 @@
   border-bottom: 1px solid #878787;
 }
 
-#browseAddons {
-  text-decoration: underline;
-}
-
 /*** sorters ***/
 
 .sort-controls {
@@ -792,6 +788,7 @@ setting[type="radio"] > radiogroup {
   display: none;
 }
 
+.text-link,
 .button-link {
   -moz-appearance: none;
   background: transparent;
@@ -803,6 +800,7 @@ setting[type="radio"] > radiogroup {
   margin: 0 6px;
 }
 
+.text-link:active,
 .button-link:active {
   color: -moz-activehyperlinktext;
 }
