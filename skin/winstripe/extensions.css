@@ -857,3 +857,8 @@ setting[type="radio"] > radiogroup {
 .header-button .toolbarbutton-text {
   display: none;
 }
+
+#checkUpdatesAllButton {
+  -moz-box-ordinal-group: 2;
+}
+

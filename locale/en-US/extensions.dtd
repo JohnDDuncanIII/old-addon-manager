@@ -7,32 +7,16 @@
 
 <!ENTITY browseAddons.label               "Browse All Add-ons">
 
-<!ENTITY cmd.showUpdateInfo.label         "Show Information">
-<!ENTITY cmd.showUpdateInfo.accesskey     "S">
-<!ENTITY cmd.showUpdateInfo.tooltip       "Show more information about these updates">
-<!ENTITY cmd.hideUpdateInfo.label         "Hide Information">
-<!ENTITY cmd.hideUpdateInfo.accesskey     "H">
-<!ENTITY cmd.hideUpdateInfo.tooltip       "Hide information about these updates">
-
 <!ENTITY cmd.checkUpdatesAll.label        "Find Updates">
 <!ENTITY cmd.checkUpdatesAll.accesskey    "F">
 <!ENTITY cmd.checkUpdatesAllAddon.tooltip "Finds Updates to your Add-ons">
 <!ENTITY cmd.checkUpdatesAllTheme.tooltip "Finds Updates to your Themes">
 <!ENTITY cmd.checkUpdatesAllPlugin.tooltip "Finds Updates to your Plugins">
+
 <!ENTITY cmd.installLocalFile.label       "Install…">
 <!ENTITY cmd.installLocalFile.accesskey   "n">
 <!ENTITY cmd.installFileAddon.tooltip     "Install an Add-on">
 <!ENTITY cmd.installFileTheme.tooltip     "Install a Theme">
-<!ENTITY cmd.installUpdatesAll2.label     "Install Updates">
-<!ENTITY cmd.installUpdatesAll2.accesskey "I">
-<!ENTITY cmd.installUpdatesAll2.tooltip   "Install the selected updates">
-
-<!ENTITY cmd.skip.label                   "Skip">
-<!ENTITY cmd.skip.accesskey               "k">
-<!ENTITY cmd.skip.tooltip                 "Skip these updates">
-<!ENTITY cmd.continue.label               "Continue">
-<!ENTITY cmd.continue.accesskey           "C">
-<!ENTITY cmd.continue.tooltip             "Continue loading brandShortName;">
 
 <!ENTITY getExtensions.label              "Get Extensions">
 <!ENTITY getThemes.label                  "Get Themes">
