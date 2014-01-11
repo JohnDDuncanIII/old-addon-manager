@@ -37,36 +37,6 @@
                value="&browseAddons.label;"
                onclick="if (event.button == 0) { oamObject.browseAddons(); }"/>
       </hbox>
-        <splitter id="themeSplitter" hidden="false" collapse="none" persist="state" orient="vertical" insertafter="view-port"/>
-        <vbox id="themePreviewArea" hidden="false" width="220" flex="1" persist="width">
-          <deck id="previewImageDeck" flex="1">
-            <vbox id="noThemeSelected" pack="center" align="center">
-<!--                <label class="previewText">&previewNoThemeSelected.label;</label>-->
-            </vbox>
-            <vbox id="noPreviewImage" pack="center" align="center">
-<!--              <label class="previewText">&previewNoPreviewImage.label;</label>-->
-            </vbox>
-            <vbox id="previewImageContainer" align="center" pack="center">
-              <hbox>
-                <image id="previewImage" onerror="onPreviewImageError(event)"/>
-              </hbox>
-            </vbox>
-            <vbox id="infoNoAddonSelected" align="center" pack="center">
-<!--              <label class="previewText">&infoNoAddonSelected.label;</label>-->
-            </vbox>
-            <vbox id="infoNoUpdateInfo" align="center" pack="center">
-<!--              <label class="previewText">&infoNoUpdateInfo.label;</label>-->
-            </vbox>
-            <vbox id="infoLoadingInfo" align="center" pack="center">
-              <image class="addonThrobber"/>
-            </vbox>
-            <vbox id="infoUpdateInfoError" align="center" pack="center">
-<!--              <label class="previewText">&infoUpdateInfoError.label;</label>-->
-            </vbox>
-            <vbox id="infoDisplay">
-            </vbox>
-          </deck>
-        </vbox>
       <hbox id="commandBarBottom" align="center">
         <button id="installFileButton" label="&cmd.installLocalFile.label;"
                 accesskey="&cmd.installLocalFile.accesskey;"
