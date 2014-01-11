@@ -1,6 +1,6 @@
 EXT_ID={4fa312e3-f23b-48f6-86d0-a06b5b8eb6a0}
 EXT_NAME=Old Addon Manager
-EXT_DESC=WIP
+EXT_DESC=Brings back Firefox 3.x Addon Manager
 
 NAME=oam
 VERSION=0.0.1
