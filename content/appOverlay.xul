@@ -8,5 +8,4 @@
 <overlay id="tasksOverlayOAM"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
     <script type="application/javascript" src="appOverlay.js"/>
-    <label id="dummy" emWidth="&em.width;" emHeight="&em.height;"/>
 </overlay>
