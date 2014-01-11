@@ -13,7 +13,9 @@ overlay chrome://communicator/content/tasksOverlay.xul         chrome://$NAME/co
 overlay about:addons                                           chrome://$NAME/content/aboutAddonsOverlay.xul
 
 style chrome://mozapps/content/extensions/extensions.xul chrome://$NAME/content/layout.css
+style about:addons chrome://$NAME/content/layout.css
 overlay chrome://mozapps/content/extensions/extensions.xul chrome://$NAME/content/extensionsOverlay.xul
+overlay about:addons chrome://$NAME/content/extensionsOverlay.xul
 override chrome://mozapps/skin/extensions/extensions.css chrome://$NAME/skin/extensions.css
 
 #Locales
