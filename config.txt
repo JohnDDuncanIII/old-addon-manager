@@ -3,7 +3,7 @@ EXT_NAME=Old Addon Manager
 EXT_DESC=Brings back Firefox 3.x Addon Manager
 
 NAME=oam
-VERSION=0.0.1
+VERSION=0.1
 
 FX_ID={ec8030f7-c20a-464f-9b0e-13a3a9e97384}
 FX_MIN_VERSION=14.0
