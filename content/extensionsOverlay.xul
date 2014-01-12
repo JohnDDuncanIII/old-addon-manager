@@ -11,7 +11,7 @@
 
 <overlay id="mainOverlayOAM"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-    <script type="application/javascript" src="extensionsOverlay.js"/>
+    <script type="application/javascript" src="chrome://$NAME/content/extensionsOverlay.js"/>
 
     <page id="addons-page"
           screenX="10"
