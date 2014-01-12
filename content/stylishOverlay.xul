@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!-- This overlay provides Stylish compatibility. -->
+
+<?xul-overlay href="chrome://stylish/content/manage.xul"?>
+<?xml-stylesheet href="chrome://$NAME/skin/stylish.css" type="text/css"?>
+
+<!DOCTYPE overlay
+[
+    <!ENTITY % oamDTD SYSTEM "chrome://$NAME/locale/extensions.dtd"> %oamDTD;
+    <!ENTITY % stylishDTD SYSTEM "chrome://stylish/locale/manage.dtd"> %stylishDTD;
+]>
+
+<overlay id="stylishOverlayOAM"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <script type="application/javascript" src="chrome://$NAME/content/stylishOverlay.js"/>
+
+    <page id="addons-page">
+        <stringbundleset id="stylish-stringbundleset"/>
+    </page>
+
+    <box id="view-port-container">
+        <notificationbox id="styles-container" insertbefore="view-port"/>
+    </box>
+
+    <hbox id="commandBarBottom">
+        <button id="update-all"
+                label="&cmd.checkUpdatesAll.label;"
+                accesskey="&cmd.checkUpdatesAll.accesskey;"
+                oncommand="stylishManage.updateAll()"
+                insertafter="checkUpdatesAllButton"/>
+        <button id="install-style"
+                label="&installfromurls;"
+                oncommand="oamObjectStylish.stylishStartInstallFromUrls(this)"/>
+        <button id="new-style"
+                label="&writenew;"
+                accesskey="&writenew.ak;"
+                oncommand="stylishCommon.addCode('')"/>
+    </hbox>
+</overlay>

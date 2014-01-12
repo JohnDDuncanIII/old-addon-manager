@@ -18,6 +18,8 @@ overlay chrome://mozapps/content/extensions/extensions.xul chrome://$NAME/conten
 overlay about:addons chrome://$NAME/content/extensionsOverlay.xul
 override chrome://mozapps/skin/extensions/extensions.css chrome://$NAME/skin/extensions.css
 
+override chrome://stylish/content/manage-addons-fx4.xul chrome://$NAME/content/stylishOverlay.xul
+
 #Locales
 locale $NAME en-US locale/en-US/
 locale $NAME ru    locale/ru/

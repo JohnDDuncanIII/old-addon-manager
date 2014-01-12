@@ -1,0 +1,53 @@
+#category-userstyles > .category-icon, #category-userstyle > .category-icon {
+  list-style-image: url("chrome://stylish/skin/32.png");
+}
+
+#styles{
+  -moz-appearance: listbox;
+}
+
+#styles-container{
+  margin-left: 8px !important;
+  margin-right: 8px !important;
+  margin-top: -1px !important;
+}
+
+*[anonid="twisty"] .button-icon {
+  display: block !important;
+}
+
+#styles richlistitem {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  -moz-padding-start: 7px;
+  -moz-padding-end: 7px;
+  min-height: 25px;
+  border-bottom: 1px dotted #C0C0C0;
+}
+
+#styles richlistitem[isDisabled="true"] *[anonid="status-icon"] {
+  opacity: 0.3 !important;
+}
+
+#styles richlistitem[isDisabled="true"] {
+  color: GrayText;
+}
+
+#styles richlistitem[selected="true"] {
+  background-color: -moz-cellhighlight;
+  color: -moz-cellhighlighttext;
+}
+
+#styles:focus richlistitem[selected="true"] {
+  background-image: url("chrome://oam/skin/itemEnabledFader.png") !important;
+  background-color: Highlight;
+  color: HighlightText;
+}
+
+#styles:focus richlistitem[selected="true"][isDisabled="true"] {
+  background-image: url("chrome://oam/skin/itemDisabledFader.png") !important;
+}
+
+#checkUpdatesAllButton[stylish] {
+  visibility: collapse !important;
+}
