@@ -29,4 +29,4 @@ var oamObjectStylish = {
   }
 }
 
-window.addEventListener("ViewChanged", oamObjectStylish.updateStylish, false);
+window.addEventListener("load", oamObjectStylish.updateStylish, false);

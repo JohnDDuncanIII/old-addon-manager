@@ -20,4 +20,4 @@ var oamObjectGM = {
   }
 }
 
-window.addEventListener("ViewChanged", oamObjectGM.updateGM, false);
+window.addEventListener("load", oamObjectGM.updateGM, false);

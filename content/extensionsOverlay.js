@@ -8,6 +8,12 @@ gCategories.maybeHideSearch = function() {
 
   //Addition
   oamObject.updateUI();
+  if (typeof(oamObjectStylish) != "undefined"){
+    oamObjectStylish.updateStylish();
+  }
+  if (typeof(oamObjectGM) != "undefined"){
+    oamObjectGM.updateGM();
+  }
 }
 
 var oamObject = {
