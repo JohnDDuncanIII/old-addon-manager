@@ -12,13 +12,18 @@ overlay chrome://messenger/content/customizeToolbarOverlay.xul chrome://$NAME/co
 overlay chrome://communicator/content/tasksOverlay.xul         chrome://$NAME/content/appOverlay.xul application=$SM_ID
 overlay about:addons                                           chrome://$NAME/content/aboutAddonsOverlay.xul
 
-style chrome://mozapps/content/extensions/extensions.xul chrome://$NAME/content/layout.css
-style about:addons chrome://$NAME/content/layout.css
-overlay chrome://mozapps/content/extensions/extensions.xul chrome://$NAME/content/extensionsOverlay.xul
-overlay about:addons chrome://$NAME/content/extensionsOverlay.xul
-override chrome://mozapps/skin/extensions/extensions.css chrome://$NAME/skin/extensions.css
+style chrome://mozapps/content/extensions/extensions.xul       chrome://$NAME/content/layout.css
+style about:addons                                             chrome://$NAME/content/layout.css
+overlay chrome://mozapps/content/extensions/extensions.xul     chrome://$NAME/content/extensionsOverlay.xul
+overlay about:addons                                           chrome://$NAME/content/extensionsOverlay.xul
+override chrome://mozapps/skin/extensions/extensions.css       chrome://$NAME/skin/extensions.css
 
-override chrome://stylish/content/manage-addons-fx4.xul chrome://$NAME/content/stylishOverlay.xul
+#Stylish
+override chrome://stylish/content/manage-addons-fx4.xul        chrome://$NAME/content/stylishOverlay.xul
+
+#Greasemonkey
+overlay  chrome://mozapps/content/extensions/extensions.xul    chrome://greasemonkey/content/addons4-overlay.xul
+override chrome://greasemonkey/content/addons4-overlay.xul     chrome://$NAME/content/gmOverlay.xul
 
 #Locales
 locale $NAME en-US locale/en-US/

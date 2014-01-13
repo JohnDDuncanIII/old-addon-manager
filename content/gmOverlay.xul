@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!-- This overlay provides Greasemonkey compatibility. -->
+
+<?xml-stylesheet href="chrome://$NAME/skin/gm.css" type="text/css"?>
+
+<!DOCTYPE overlay
+[
+    <!ENTITY % oamDTD SYSTEM "chrome://$NAME/locale/extensions.dtd"> %oamDTD;
+    <!ENTITY % gmAddonsDTD SYSTEM "chrome://greasemonkey/locale/gm-addons.dtd"> %gmAddonsDTD;
+    <!ENTITY % gmDTD SYSTEM "chrome://greasemonkey/locale/greasemonkey.dtd"> %gmDTD;
+]>
+
+<overlay id="gmOverlayOAM"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <script type="application/javascript" src="chrome://$NAME/content/gmOverlay.js"/>
+    <script type="application/javascript" src="chrome://greasemonkey/content/addons4-overlay.js"/>
+
+    <commandset id="viewCommandSet">
+        <command id="cmd_userscript_edit" />
+        <command id="cmd_userscript_show" />
+        <command id="cmd_userscript_execute_first" />
+        <command id="cmd_userscript_execute_sooner" />
+        <command id="cmd_userscript_execute_later" />
+        <command id="cmd_userscript_execute_last" />
+        <command id="cmd_userscript_showItemPreferences" />
+        <command id="cmd_userscript_forcedFindItemUpdates" />
+    </commandset>
+
+    <vbox id="list-view">
+        <vbox id="user-script-list-empty" style="visibility: collapse"/>
+        <hbox id="greasemonkey-sort-bar" style="visibility: collapse">
+            <button checkState="2"/>
+            <button/>
+            <button/>
+        </hbox>
+    </vbox>
+
+    <hbox id="commandBarBottom">
+        <button id="findUpdatesUserscripts"
+                insertafter="checkUpdatesAllButton"
+                label="&cmd.checkUpdatesAll.label;"
+                accesskey="&cmd.checkUpdatesAll.accesskey;"
+                command="cmd_userscript_forcedFindItemUpdates"/>
+        <label id="getMoreUserscripts"
+               class="text-link"
+               insertafter="getMore"
+               onclick="if (event.button == 0) { openURL(this.getAttribute('getMoreURL')); }"
+               value="&greasemonkey.getuserscripts;"
+               getMoreURL="http://userscripts.org/"/>
+        <button id="newUserscript"
+                label="&NewScript;"
+                accesskey="&NewScript.accesskey;"
+                oncommand="GM_util.newUserScript(window)"/>
+    </hbox>
+</overlay>
