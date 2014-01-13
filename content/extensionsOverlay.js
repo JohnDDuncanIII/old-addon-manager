@@ -2,6 +2,20 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+gCategories.maybeHideSearch = function() {
+  var view = gViewController.parseViewId(this.node.selectedItem.value);
+  this._search.disabled = view.type != "search";
+
+  //Addition
+  oamObject.updateUI();
+  if (oamObjectStylish){
+      oamObjectStylish.updateStylish();
+  }
+  if (oamObjectGM){
+      oamObjectGM.updateGM();
+  }
+}
+
 var oamObject = {
   updateUI : function oamUpdateUI(){
     var category = gCategories.node.selectedItem.value;
@@ -42,4 +56,4 @@ var oamObject = {
   }
 }
 
-window.addEventListener("ViewChanged", oamObject.updateUI, false);
+window.addEventListener("load", oamObject.updateUI, false);

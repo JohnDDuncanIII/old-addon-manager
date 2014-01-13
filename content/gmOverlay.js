@@ -4,6 +4,9 @@
 
 var oamObjectGM = {
   updateGM : function(){
+    if (!gCategories.node){
+      return;
+    }
     var category = gCategories.node.selectedItem.value;
     var gm = category == "addons://list/greasemonkey-user-script";
     document.getElementById("findUpdatesUserscripts").hidden = !gm;
