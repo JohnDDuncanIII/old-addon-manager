@@ -6,10 +6,17 @@
   -moz-appearance: listbox;
 }
 
-#styles-container{
-  margin-left: 8px !important;
-  margin-right: 8px !important;
+#styles-container {
+  margin-left: 4px !important;
+  margin-right: 4px !important;
+  margin-bottom: -2px !important;
   margin-top: -1px !important;
+}
+
+#userstyles-heading {
+  margin-top: 9px !important;
+  margin-left: 4px !important;
+  margin-right: 4px !important;
 }
 
 *[anonid="twisty"] .button-icon {

@@ -3,13 +3,22 @@
 }
 
 #styles{
-  -moz-appearance: listbox;
+  -moz-appearance: none !important;
+  border: none !important;
+  margin-bottom: 0px !important;
 }
 
-#styles-container{
-  margin-left: 8px !important;
-  margin-right: 8px !important;
-  margin-top: -1px !important;
+#styles-container {
+  margin-left: -5px !important;
+  margin-right: -5px !important;
+  border-bottom: 1px solid #878787;
+}
+
+#userstyles-heading {
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+  margin-bottom: -2px !important;
+  border-bottom: 1px solid #878787;
 }
 
 *[anonid="twisty"] .button-icon {

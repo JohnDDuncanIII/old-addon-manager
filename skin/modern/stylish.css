@@ -5,10 +5,17 @@
   -moz-border-left-colors: #BEC3D3 #5D616E !important;
 }
 
-#styles-container{
-  margin-left: 8px !important;
-  margin-right: 8px !important;
+#styles-container {
+  margin-left: 4px !important;
+  margin-right: 4px !important;
+  margin-bottom: -2px !important;
   margin-top: -1px !important;
+}
+
+#userstyles-heading {
+  margin-top: 8px !important;
+  margin-left: 4px !important;
+  margin-right: 4px !important;
 }
 
 *[anonid="twisty"] .button-icon {
