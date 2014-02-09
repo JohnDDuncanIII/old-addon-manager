@@ -815,27 +815,6 @@ setting[type="radio"] > radiogroup {
   display: none;
 }
 
-.addon-control.enable {
-  list-style-image: url("moz-icon://stock/gtk-yes?size=button");
-}
-
-.addon-control.disable {
-  list-style-image: url("moz-icon://stock/gtk-no?size=button");
-}
-
-.addon-control.remove {
-  list-style-image: url("moz-icon://stock/gtk-remove?size=button");
-}
-
-.addon-control.preferences {
-  list-style-image: url("moz-icon://stock/gtk-preferences?size=button");
-}
-
-.addon-control.install,
-.addon-control.update {
-  list-style-image: url("moz-icon://stock/gtk-save?size=button");
-}
-
 .text-link,
 .button-link {
   -moz-appearance: none;
