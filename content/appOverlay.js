@@ -5,7 +5,7 @@
 function toEM(aPane) {
   var theEM = Components.classes["@mozilla.org/appshell/window-mediator;1"]
                         .getService(Components.interfaces.nsIWindowMediator)
-                        .getMostRecentWindow("Extension:Manager");
+                        .getMostRecentWindow("Addons:Manager");
   if (theEM) {
     theEM.focus();
     if (aPane)
