@@ -4,3 +4,4 @@ locale $NAME en-US     locale/en-US/
 
 overlay chrome://communicator/content/tasksOverlay.xul         chrome://$NAME/content/appOverlay.xul application=$SM_ID
 overlay chrome://browser/content/browser.xul         chrome://$NAME/content/appOverlay.xul application=$FX_ID
+overlay chrome://messenger/content/baseMenuOverlay.xul         chrome://$NAME/content/appOverlay.xul application=$TB_ID
