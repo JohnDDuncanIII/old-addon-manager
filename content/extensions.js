@@ -38,6 +38,8 @@ const LOADING_MSG_DELAY = 100;
 
 const UPDATES_RELEASENOTES_TRANSFORMFILE = "chrome://mozapps/content/extensions/updateinfo.xsl";
 
+const XMLURI_PARSE_ERROR = "http://www.mozilla.org/newlayout/xml/parsererror.xml"
+
 var gViewDefault = "addons://list/extension";
 
 var gStrings = {};
@@ -2123,11 +2125,11 @@ var gUpdatesView = {
   _showInfo: null,
 
   initialize: function gUpdatesView_initialize() {
-    this.node = document.getElementById("list-view");
-    this._listBox = document.getElementById("addon-list");
-    this._emptyNotice = document.getElementById("addon-list-empty");
-    this._infoSplitter = document.getElementById("themeSplitter");
-    this._infoPreviewArea = document.getElementById("themePreviewArea");
+    this.node = document.getElementById("updates-view");
+    this._listBox = document.getElementById("updates-list");
+    this._emptyNotice = document.getElementById("updates-list-empty");
+    this._infoSplitter = document.getElementById("relNotesSplitter");
+    this._infoPreviewArea = document.getElementById("relNotesArea");
     this._showInfo = false;
 
     this._categoryItem = gCategories.get("addons://updates/");
@@ -2150,16 +2152,72 @@ var gUpdatesView = {
 
       var infoDisplay = document.getElementById("infoDisplay");
       var addon = item.mAddon;
+      var manualUpdate = item.mManualUpdate;
 
-      if (addon.screenshots && addon.screenshots.length > 0) {
-        if (addon.screenshots[0].thumbnailURL)
-          infoDisplay.src = addon.screenshots[0].thumbnailURL;
-        else
-          infoDisplay.src = addon.screenshots[0].url;
-        infoDisplay.setAttribute("loading", "true");
-        infoDeck.selectedIndex = 2;
-      } else
+      infoDeck.selectedIndex = 2;
+
+      var relNotesData = null, transformData = null;
+
+      function showRelNotes() {
+        if (!relNotesData || !transformData) {
+          return;
+        }
+
+        infoDeck.selectedIndex = 4;
+
+        var processor = Components.classes["@mozilla.org/document-transformer;1?type=xslt"]
+                                  .createInstance(Components.interfaces.nsIXSLTProcessor);
+        processor.flags |= Components.interfaces.nsIXSLTProcessorPrivate.DISABLE_ALL_LOADS;
+
+        processor.importStylesheet(transformData);
+        var fragment = processor.transformToFragment(relNotesData, document);
+        while (infoDisplay.hasChildNodes())
+          infoDisplay.removeChild(infoDisplay.firstChild);
+        infoDisplay.appendChild(fragment);
+      }
+
+      function handleError() {
+        dataReq.abort();
+        styleReq.abort();
+        infoDeck.selectedIndex = 3;
+      }
+
+      function handleResponse(aEvent) {
+        var req = aEvent.target;
+        var ct = req.getResponseHeader("content-type");
+        if ((!ct || ct.indexOf("text/html") < 0) &&
+            req.responseXML &&
+            req.responseXML.documentElement.namespaceURI != XMLURI_PARSE_ERROR) {
+          if (req == dataReq)
+            relNotesData = req.responseXML;
+          else
+            transformData = req.responseXML;
+          showRelNotes();
+        } else {
+          handleError();
+        }
+      }
+
+      var uri = manualUpdate ?
+                manualUpdate.releaseNotesURI :
+                addon.releaseNotesURI;
+      if (!uri) {
         infoDeck.selectedIndex = 1;
+        return;
+      }
+      var dataReq = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"]
+                          .createInstance(Components.interfaces.nsIXMLHttpRequest);
+      dataReq.open("GET", uri.spec, true);
+      dataReq.addEventListener("load", handleResponse, false);
+      dataReq.addEventListener("error", handleError, false);
+      dataReq.send(null);
+
+      var styleReq = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"]
+                          .createInstance(Components.interfaces.nsIXMLHttpRequest);
+      styleReq.open("GET", UPDATES_RELEASENOTES_TRANSFORMFILE, true);
+      styleReq.addEventListener("load", handleResponse, false);
+      styleReq.addEventListener("error", handleError, false);
+      styleReq.send(null);
     }, false);
 
     this._updateSelected = document.getElementById("installUpdatesAllButton");
@@ -2171,7 +2229,7 @@ var gUpdatesView = {
   },
 
   show: function gUpdatesView_show(aType, aRequest) {
-    document.getElementById("addon-list-empty").hidden = false;
+    document.getElementById("updates-list-empty").hidden = false;
     this.showEmptyNotice(false);
 
     this._infoSplitter.hidden = !this._showInfo;

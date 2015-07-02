@@ -561,23 +561,6 @@
                 <xul:label anonid="description" class="description" crop="end" flex="1"/>
                 <xul:spacer flex="5000"/> <!-- Necessary to make the description crop -->
               </xul:hbox>
-              <xul:vbox anonid="relnotes-container" class="relnotes-container">
-                <xul:label class="relnotes-header" value="&addon.releaseNotes.label;"/>
-                <xul:label anonid="relnotes-loading" value="&addon.loadingReleaseNotes.label;"/>
-                <xul:label anonid="relnotes-error" hidden="true"
-                           value="&addon.errorLoadingReleaseNotes.label;"/>
-                <xul:vbox anonid="relnotes" class="relnotes"/>
-              </xul:vbox>
-              <xul:hbox class="relnotes-toggle-container">
-                <xul:button anonid="relnotes-toggle-btn" class="relnotes-toggle"
-                            hidden="true" label="&cmd.showReleaseNotes.label;"
-                            tooltiptext="&cmd.showReleaseNotes.tooltip;"
-                            showlabel="&cmd.showReleaseNotes.label;"
-                            showtooltip="&cmd.showReleaseNotes.tooltip;"
-                            hidelabel="&cmd.hideReleaseNotes.label;"
-                            hidetooltip="&cmd.hideReleaseNotes.tooltip;"
-                            oncommand="document.getBindingParent(this).toggleReleaseNotes();"/>
-              </xul:hbox>
             </xul:vbox>
           </xul:hbox>
         </xul:vbox>
@@ -676,10 +659,6 @@
         gEventManager.unregisterAddonListener(this, this.mAddon.id);
       ]]></destructor>
 
-      <field name="_warningContainer">
-        document.getAnonymousElementByAttribute(this, "anonid",
-                                                "warning-container");
-      </field>
       <field name="_warning">
         document.getAnonymousElementByAttribute(this, "anonid",
                                                 "warning");
@@ -800,27 +779,6 @@
         document.getAnonymousElementByAttribute(this, "anonid",
                                                 "include-update");
       </field>
-      <field name="_relNotesLoaded">false</field>
-      <field name="_relNotesToggle">
-        document.getAnonymousElementByAttribute(this, "anonid",
-                                                "relnotes-toggle-btn");
-      </field>
-      <field name="_relNotesLoading">
-        document.getAnonymousElementByAttribute(this, "anonid",
-                                                "relnotes-loading");
-      </field>
-      <field name="_relNotesError">
-        document.getAnonymousElementByAttribute(this, "anonid",
-                                                "relnotes-error");
-      </field>
-      <field name="_relNotesContainer">
-        document.getAnonymousElementByAttribute(this, "anonid",
-                                                "relnotes-container");
-      </field>
-      <field name="_relNotes">
-        document.getAnonymousElementByAttribute(this, "anonid",
-                                                "relnotes");
-      </field>
 
       <property name="userDisabled">
         <getter><![CDATA[
@@ -903,9 +861,6 @@
             this._installStatus.refreshState();
           this._checkingUpdate.hidden = aType != "checking-update";
           this._updateAvailable.hidden = aType != "update-available";
-          this._relNotesToggle.hidden = !(this.mManualUpdate ?
-                                          this.mManualUpdate.releaseNotesURI :
-                                          this.mAddon.releaseNotesURI);
         ]]></body>
       </method>
 
@@ -1160,124 +1115,6 @@
           // Only update the version string if we're displaying the upgrade info
           if (this.hasAttribute("upgrade") && shouldShowVersionNumber(this.mAddon))
             this._version.value = this.mManualUpdate.version;
-        ]]></body>
-      </method>
-
-      <method name="_fetchReleaseNotes">
-        <parameter name="aURI"/>
-        <body><![CDATA[
-          var self = this;
-          if (!aURI || this._relNotesLoaded) {
-            sendToggleEvent();
-            return;
-          }
-
-          var relNotesData = null, transformData = null;
-
-          this._relNotesLoaded = true;
-          this._relNotesLoading.hidden = false;
-          this._relNotesError.hidden = true;
-
-          function sendToggleEvent() {
-            var event = document.createEvent("Events");
-            event.initEvent("RelNotesToggle", true, true);
-            self.dispatchEvent(event);
-          }
-
-          function showRelNotes() {
-            if (!relNotesData || !transformData)
-              return;
-
-            self._relNotesLoading.hidden = true;
-
-            var processor = Components.classes["@mozilla.org/document-transformer;1?type=xslt"]
-                                      .createInstance(Components.interfaces.nsIXSLTProcessor);
-            processor.flags |= Components.interfaces.nsIXSLTProcessorPrivate.DISABLE_ALL_LOADS;
-
-            processor.importStylesheet(transformData);
-            var fragment = processor.transformToFragment(relNotesData, document);
-            self._relNotes.appendChild(fragment);
-            if (self.hasAttribute("show-relnotes")) {
-              var container = self._relNotesContainer;
-              container.style.height = container.scrollHeight + "px";
-            }
-            sendToggleEvent();
-          }
-
-          function handleError() {
-            dataReq.abort();
-            styleReq.abort();
-            self._relNotesLoading.hidden = true;
-            self._relNotesError.hidden = false;
-            self._relNotesLoaded = false; // allow loading to be re-tried
-            sendToggleEvent();
-          }
-
-          function handleResponse(aEvent) {
-            var req = aEvent.target;
-            var ct = req.getResponseHeader("content-type");
-            if ((!ct || ct.indexOf("text/html") < 0) &&
-                req.responseXML &&
-                req.responseXML.documentElement.namespaceURI != XMLURI_PARSE_ERROR) {
-              if (req == dataReq)
-                relNotesData = req.responseXML;
-              else
-                transformData = req.responseXML;
-              showRelNotes();
-            } else {
-              handleError();
-            }
-          }
-
-          var dataReq = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"]
-                              .createInstance(Components.interfaces.nsIXMLHttpRequest);
-          dataReq.open("GET", aURI.spec, true);
-          dataReq.addEventListener("load", handleResponse, false);
-          dataReq.addEventListener("error", handleError, false);
-          dataReq.send(null);
-
-          var styleReq = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"]
-                              .createInstance(Components.interfaces.nsIXMLHttpRequest);
-          styleReq.open("GET", UPDATES_RELEASENOTES_TRANSFORMFILE, true);
-          styleReq.addEventListener("load", handleResponse, false);
-          styleReq.addEventListener("error", handleError, false);
-          styleReq.send(null);
-        ]]></body>
-      </method>
-
-      <method name="toggleReleaseNotes">
-        <body><![CDATA[
-          if (this.hasAttribute("show-relnotes")) {
-            this._relNotesContainer.style.height = "0px";
-            this.removeAttribute("show-relnotes");
-            this._relNotesToggle.setAttribute(
-              "label",
-              this._relNotesToggle.getAttribute("showlabel")
-            );
-            this._relNotesToggle.setAttribute(
-              "tooltiptext",
-              this._relNotesToggle.getAttribute("showtooltip")
-            );
-            var event = document.createEvent("Events");
-            event.initEvent("RelNotesToggle", true, true);
-            this.dispatchEvent(event);
-          } else {
-            this._relNotesContainer.style.height = this._relNotesContainer.scrollHeight +
-                                                   "px";
-            this.setAttribute("show-relnotes", true);
-            this._relNotesToggle.setAttribute(
-              "label",
-              this._relNotesToggle.getAttribute("hidelabel")
-            );
-            this._relNotesToggle.setAttribute(
-              "tooltiptext",
-              this._relNotesToggle.getAttribute("hidetooltip")
-            );
-            var uri = this.mManualUpdate ?
-                      this.mManualUpdate.releaseNotesURI :
-                      this.mAddon.releaseNotesURI;
-            this._fetchReleaseNotes(uri);
-          }
         ]]></body>
       </method>
 
