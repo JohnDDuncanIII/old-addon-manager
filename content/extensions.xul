@@ -14,6 +14,8 @@
 %extensionsDTD;
 <!ENTITY % oldExtensionsDTD SYSTEM "chrome://oam/locale/extensions.dtd">
 %oldExtensionsDTD;
+<!ENTITY % extensionsCompatDTD SYSTEM "chrome://oam/locale/extensions2.dtd">
+%extensionsCompatDTD;
 ]>
 
 <?xul-overlay href="chrome://global/content/globalOverlay.xul"?>
@@ -160,14 +162,13 @@
           <!-- search view -->
           <vbox id="search-view" flex="1" class="view-pane" tabindex="0">
             <hbox id="search-header" align="center">
-              <textbox id="header-search" type="search" searchbutton="true"
-                       searchbuttonlabel="&search.buttonlabel;"
+              <textbox id="header-search" type="search"
                        placeholder="&search.placeholder;"/>
               <spacer flex="1"/>
               <label id="browseAddons" class="text-link" value="&browseAddons.label;"
                      onclick="goDoCommand('cmd_browseAddons');" />
             </hbox>
-            <vbox id="search-loading" class="alert-container"
+            <vbox id="search-loading"
                   flex="1" hidden="true">
               <spacer class="alert-spacer-before"/>
               <hbox class="alert loading" align="center">
@@ -176,7 +177,7 @@
               </hbox>
               <spacer class="alert-spacer-after"/>
             </vbox>
-            <vbox id="search-list-empty" class="alert-container"
+            <vbox id="search-list-empty"
                   flex="1" hidden="true">
               <spacer class="alert-spacer-before"/>
               <vbox class="alert">
@@ -217,7 +218,7 @@
                 <spacer flex="5000"/> <!-- Necessary to allow the message to wrap. -->
               </hbox>
             </hbox>
-            <vbox id="addon-list-empty" class="alert-container"
+            <vbox id="addon-list-empty"
                   flex="1" hidden="true">
               <spacer class="alert-spacer-before"/>
               <vbox class="alert">
@@ -248,7 +249,7 @@
 
           <!-- updates view -->
           <vbox id="updates-view" flex="1" class="view-pane" tabindex="0">
-             <vbox id="updates-list-empty" class="alert-container"
+             <vbox id="updates-list-empty"
                   flex="1" hidden="true">
               <spacer class="alert-spacer-before"/>
               <vbox class="alert">
