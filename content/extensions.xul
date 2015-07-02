@@ -1,0 +1,388 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://oam/content/extensions.css"?>
+<?xml-stylesheet href="chrome://oam/skin/extensions.css"?>
+
+<!DOCTYPE page [
+<!ENTITY % brandDTD SYSTEM "chrome://branding/locale/brand.dtd" >
+%brandDTD;
+<!ENTITY % extensionsDTD SYSTEM "chrome://mozapps/locale/extensions/extensions.dtd">
+%extensionsDTD;
+<!ENTITY % oldExtensionsDTD SYSTEM "chrome://oam/locale/extensions.dtd">
+%oldExtensionsDTD;
+]>
+
+<?xul-overlay href="chrome://global/content/globalOverlay.xul"?>
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        id="addons-page" windowtype="Extension:Manager"
+        orient="vertical" title="&addons.title;"
+        screenX="10" screenY="10" width="&em.width;" height="&em.height;"
+        persist="width height screenX screenY sizemode">
+
+  <xhtml:link rel="shortcut icon"
+              href="chrome://mozapps/skin/extensions/extensionGeneric-16.png"/>
+
+  <script type="application/javascript"
+          src="chrome://oam/content/extensions.js"/>
+  <script type="application/javascript"
+          src="chrome://global/content/contentAreaUtils.js"/>
+
+  <popupset>
+    <!-- menu for an addon item -->
+    <menupopup id="addonitem-popup">
+      <menuitem id="menuitem_enableItem" command="cmd_enableItem"
+                label="&cmd.enableAddon.label;"
+                accesskey="&cmd.enableAddon.accesskey;"/>
+      <menuitem id="menuitem_disableItem" command="cmd_disableItem"
+                label="&cmd.disableAddon.label;"
+                accesskey="&cmd.disableAddon.accesskey;"/>
+      <menuitem id="menuitem_enableTheme" command="cmd_enableItem"
+                label="&cmd.enableTheme.label;"
+                accesskey="&cmd.enableTheme.accesskey;"/>
+      <menuitem id="menuitem_disableTheme" command="cmd_disableItem"
+                label="&cmd.disableTheme.label;"
+                accesskey="&cmd.disableTheme.accesskey;"/>
+      <menuitem id="menuitem_installItem" command="cmd_installItem"
+                label="&cmd.installAddon.label;"
+                accesskey="&cmd.installAddon.accesskey;"/>
+      <menuitem id="menuitem_uninstallItem" command="cmd_uninstallItem"
+                label="&cmd.uninstallAddon.label;"
+                accesskey="&cmd.uninstallAddon.accesskey;"/>
+      <menuitem id="menuitem_debugItem" command="cmd_debugItem"
+                label="&cmd.debugAddon.label;"
+                accesskey="&cmd.debugAddon.accesskey;"/>
+      <menuseparator id="addonitem-menuseparator" />
+
+<!--#ifdef XP_WIN
+                label="&cmd.preferencesWin.label;"
+                accesskey="&cmd.preferencesWin.accesskey;"/>
+#else
+                label="&cmd.preferencesUnix.label;"
+                accesskey="&cmd.preferencesUnix.accesskey;"/>
+#endif-->
+      <menuitem id="menuitem_preferences" command="cmd_showItemPreferences"
+                label="&cmd.preferencesUnix.label;"
+                accesskey="&cmd.preferencesUnix.accesskey;"/>
+      <menuitem id="menuitem_findUpdates" command="cmd_findItemUpdates"
+                label="&cmd.findUpdates.label;"
+                accesskey="&cmd.findUpdates.accesskey;"/>
+      <menuitem id="menuitem_about" command="cmd_showItemAbout"
+                label="&cmd.about.label;"
+                accesskey="&cmd.about.accesskey;"/>
+
+      <menuseparator id="menu_updateSeparator" />
+      <menu id="menu_updateItem"
+            label="&detail.updateType;">
+        <menupopup>
+          <menuitem id="menuitem_updateItemDefault"
+                    label="&detail.updateDefault.label;"
+                    type="radio"
+                    command="cmd_updateItemDefault"
+                    observes="cmd_updateItemDefault"/>
+          <menuitem id="menuitem_updateItemAuto"
+                    label="&detail.updateAutomatic.label;"
+                    type="radio"
+                    command="cmd_updateItemAuto"
+                    observes="cmd_updateItemAuto"/>
+          <menuitem id="menuitem_updateItemManual"
+                    label="&detail.updateManual.label;"
+                    type="radio"
+                    command="cmd_updateItemManual"
+                    observes="cmd_updateItemManual"/>
+        </menupopup>
+      </menu>
+    </menupopup>
+  </popupset>
+
+  <!-- global commands - these act on all addons, or affect the addons manager
+       in some other way -->
+  <commandset id="globalCommandSet">
+    <command id="cmd_findAllUpdates"/>
+    <command id="cmd_restartApp"/>
+    <command id="cmd_goToUpdates"/>
+    <command id="cmd_installFromFile"/>
+    <command id="cmd_enableCheckCompatibility"/>
+    <command id="cmd_pluginCheck"/>
+    <command id="cmd_enableUpdateSecurity"/>
+    <command id="cmd_toggleAutoUpdateDefault"/>
+    <command id="cmd_resetAddonAutoUpdate"/>
+    <command id="cmd_experimentsLearnMore"/>
+    <command id="cmd_experimentsOpenTelemetryPreferences"/>
+    <command id="cmd_browseAddons"/>
+  </commandset>
+
+  <!-- view commands - these act on the selected addon -->
+  <commandset id="viewCommandSet"
+              events="richlistbox-select" commandupdater="true">
+    <command id="cmd_findItemUpdates"/>
+    <command id="cmd_showItemPreferences"/>
+    <command id="cmd_showItemAbout"/>
+    <command id="cmd_debugItem"/>
+    <command id="cmd_enableItem"/>
+    <command id="cmd_disableItem"/>
+    <command id="cmd_installItem"/>
+    <command id="cmd_purchaseItem"/>
+    <command id="cmd_uninstallItem"/>
+    <command id="cmd_cancelUninstallItem"/>
+    <command id="cmd_cancelOperation"/>
+    <command id="cmd_contribute"/>
+    <command id="cmd_askToActivateItem"/>
+    <command id="cmd_alwaysActivateItem"/>
+    <command id="cmd_neverActivateItem"/>
+    <command id="cmd_updateItemDefault"/>
+    <command id="cmd_updateItemAuto"/>
+    <command id="cmd_updateItemManual"/>
+  </commandset>
+
+  <vbox flex="1">
+    <!-- category list -->
+    <richlistbox id="categories">
+      <richlistitem id="category-search" value="addons://search/"
+                    class="category"
+                    name="&view.discover.label;" priority="0"
+                    tooltiptext="&view.discover.label;"/>
+      <richlistitem id="category-updates" value="addons://updates/"
+                    class="category"
+                    name="&view.availableUpdates.label;" priority="100000"
+                    tooltiptext="&view.availableUpdates.label;"
+                    disabled="true"/>
+    </richlistbox>
+    <vbox class="main-content" flex="1">
+        <!-- view port -->
+        <deck id="view-port" flex="1" selectedIndex="0">
+
+          <!-- search view -->
+          <vbox id="search-view" flex="1" class="view-pane" tabindex="0">
+            <hbox class="view-header global-warning-container" align="center">
+              <!-- global warnings -->
+              <hbox class="global-warning" flex="1">
+                <hbox class="global-warning-safemode" flex="1" align="center"
+                      tooltiptext="&warning.safemode.label;">
+                  <image class="warning-icon"/>
+                  <label class="global-warning-text" flex="1" crop="end"
+                         value="&warning.safemode.label;"/>
+                </hbox>
+                <hbox class="global-warning-checkcompatibility" flex="1" align="center"
+                      tooltiptext="&warning.checkcompatibility.label;">
+                  <image class="warning-icon"/>
+                  <label class="global-warning-text" flex="1" crop="end"
+                         value="&warning.checkcompatibility.label;"/>
+                </hbox>
+                <button class="button-link global-warning-checkcompatibility"
+                        label="&warning.checkcompatibility.enable.label;"
+                        tooltiptext="&warning.checkcompatibility.enable.tooltip;"
+                        command="cmd_enableCheckCompatibility"/>
+                <hbox class="global-warning-updatesecurity" flex="1" align="center"
+                      tooltiptext="&warning.updatesecurity.label;">
+                  <image class="warning-icon"/>
+                  <label class="global-warning-text" flex="1" crop="end"
+                         value="&warning.updatesecurity.label;"/>
+                </hbox>
+                <button class="button-link global-warning-updatesecurity"
+                        label="&warning.updatesecurity.enable.label;"
+                        tooltiptext="&warning.updatesecurity.enable.tooltip;"
+                        command="cmd_enableUpdateSecurity"/>
+                <spacer flex="5000"/> <!-- Necessary to allow the message to wrap -->
+              </hbox>
+              <spacer flex="1"/>
+            </hbox>
+            <hbox id="search-header" align="center">
+              <textbox id="header-search" type="search" searchbutton="true"
+                       searchbuttonlabel="&search.buttonlabel;"
+                       placeholder="&search.placeholder;"/>
+              <spacer flex="1"/>
+              <label id="browseAddons" class="text-link" value="&browseAddons.label;"
+                     onclick="goDoCommand('cmd_browseAddons');" />
+            </hbox>
+            <vbox id="search-loading" class="alert-container"
+                  flex="1" hidden="true">
+              <spacer class="alert-spacer-before"/>
+              <hbox class="alert loading" align="center">
+                <image/>
+                <label value="&loading.label;"/>
+              </hbox>
+              <spacer class="alert-spacer-after"/>
+            </vbox>
+            <vbox id="search-list-empty" class="alert-container"
+                  flex="1" hidden="true">
+              <spacer class="alert-spacer-before"/>
+              <vbox class="alert">
+                <label value="&listEmpty.search.label;"/>
+              </vbox>
+              <spacer class="alert-spacer-after"/>
+            </vbox>
+            <richlistbox id="search-list" class="list" flex="1">
+              <hbox id="search-recommended-header" pack="start">
+                <label value="&recommendedHeader.label;" />
+              </hbox>
+              <hbox align="center">
+                <label id="search-allresults-link" class="text-link"/>
+                <spacer flex="1" />
+                <label id="search-allrecommended-link" class="text-link"
+                       value="&recommendedResults.label;"/>
+                <spacer flex="1" />
+                <button id="search-clear-button" label="&resetSearch.label;" />
+              </hbox>
+            </richlistbox>
+          </vbox>
+
+          <!-- list view -->
+          <vbox id="list-view" flex="1" class="view-pane" align="stretch" tabindex="0">
+            <hbox class="view-header global-warning-container">
+              <!-- global warnings -->
+              <hbox class="global-warning" flex="1">
+                <hbox class="global-warning-safemode" flex="1" align="center"
+                      tooltiptext="&warning.safemode.label;">
+                  <image class="warning-icon"/>
+                  <label class="global-warning-text" flex="1" crop="end"
+                         value="&warning.safemode.label;"/>
+                </hbox>
+                <hbox class="global-warning-checkcompatibility" flex="1" align="center"
+                      tooltiptext="&warning.checkcompatibility.label;">
+                  <image class="warning-icon"/>
+                  <label class="global-warning-text" flex="1" crop="end"
+                         value="&warning.checkcompatibility.label;"/>
+                </hbox>
+                <button class="button-link global-warning-checkcompatibility"
+                        label="&warning.checkcompatibility.enable.label;"
+                        tooltiptext="&warning.checkcompatibility.enable.tooltip;"
+                        command="cmd_enableCheckCompatibility"/>
+                <hbox class="global-warning-updatesecurity" flex="1" align="center"
+                      tooltiptext="&warning.updatesecurity.label;">
+                  <image class="warning-icon"/>
+                  <label class="global-warning-text" flex="1" crop="end"
+                         value="&warning.updatesecurity.label;"/>
+                </hbox>
+                <button class="button-link global-warning-updatesecurity"
+                        label="&warning.updatesecurity.enable.label;"
+                        tooltiptext="&warning.updatesecurity.enable.tooltip;"
+                        command="cmd_enableUpdateSecurity"/>
+                <spacer flex="5000"/> <!-- Necessary to allow the message to wrap -->
+              </hbox>
+            </hbox>
+            <hbox class="view-header global-info-container experiment-info-container">
+              <hbox class="global-info" flex="1" align="center">
+                <label value="&experiment.info.label;"/>
+                <button id="experiments-learn-more"
+                        label="&experiment.info.learnmore;"
+                        tooltiptext="&experiment.info.learnmore;"
+                        accesskey="&experiment.info.learnmore.accesskey;"
+                        command="cmd_experimentsLearnMore"/>
+                <button id="experiments-change-telemetry"
+                        label="&experiment.info.changetelemetry;"
+                        tooltiptext="&experiment.info.changetelemetry;"
+                        accesskey="&experiment.info.changetelemetry.accesskey;"
+                        command="cmd_experimentsOpenTelemetryPreferences"/>
+                <spacer flex="5000"/> <!-- Necessary to allow the message to wrap. -->
+              </hbox>
+            </hbox>
+            <vbox id="addon-list-empty" class="alert-container"
+                  flex="1" hidden="true">
+              <spacer class="alert-spacer-before"/>
+              <vbox class="alert">
+                <label value="&listEmpty.installed.label;"/>
+              </vbox>
+              <spacer class="alert-spacer-after"/>
+            </vbox>
+            <hbox flex="1"> 
+              <richlistbox id="addon-list" class="list" flex="1"/>
+              <splitter id="themeSplitter" hidden="true" collapse="none" persist="state"/>
+              <vbox id="themePreviewArea" hidden="true" width="220" flex="1" persist="width">
+                <deck id="previewImageDeck" flex="1">
+                  <vbox id="noThemeSelected" pack="center" align="center">
+                    <label class="previewText">&previewNoThemeSelected.label;</label>
+                  </vbox>
+                  <vbox id="noPreviewImage" pack="center" align="center">
+                    <label class="previewText">&previewNoPreviewImage.label;</label>
+                  </vbox>
+                  <vbox id="screenshotImageContainer" align="center" pack="center">
+                    <hbox>
+                      <image id="screenshotImage"/>
+                    </hbox>
+                  </vbox>
+                </deck>
+                <deck id="infoDeck" flex="1">
+	              <vbox id="infoNoAddonSelected" align="center" pack="center">
+                    <label class="previewText">&infoNoAddonSelected.label;</label>
+                  </vbox>
+                  <vbox id="infoNoUpdateInfo" align="center" pack="center">
+                    <label class="previewText">&infoNoUpdateInfo.label;</label>
+                  </vbox>
+                  <vbox id="infoLoadingInfo" align="center" pack="center">
+                    <image class="addonThrobber"/>
+                  </vbox>
+                  <vbox id="infoUpdateInfoError" align="center" pack="center">
+                    <label class="previewText">&infoUpdateInfoError.label;</label>
+                  </vbox>
+                  <vbox id="infoDisplay" />
+                </deck>
+              </vbox>
+            </hbox>
+          </vbox>
+        </deck>
+
+      <!-- main header -->
+      <hbox id="command-bar" align="center">
+      <button id="showUpdateInfoButton" label="&cmd.showUpdateInfo.label;"
+              accesskey="&cmd.showUpdateInfo.accesskey;"
+              tooltiptext="&cmd.showUpdateInfo.tooltip;"
+              oncommand="gCommandBar.toggleUpdateInfo(true)"/>
+      <button id="hideUpdateInfoButton" label="&cmd.hideUpdateInfo.label;"
+              accesskey="&cmd.hideUpdateInfo.accesskey;"
+              tooltiptext="&cmd.hideUpdateInfo.tooltip;"
+              oncommand="gCommandBar.toggleUpdateInfo(false)"/>
+      <button id="installFileButton" label="&cmd.installLocalFile.label;"
+              accesskey="&cmd.installLocalFile.accesskey;"
+              tooltiptextaddons="&cmd.installFileAddon.tooltip;"
+              tooltiptextthemes="&cmd.installFileTheme.tooltip;"
+              command="cmd_installFromFile"/>
+      <button id="checkUpdatesAllButton" label="&cmd.checkUpdatesAll.label;"
+              accesskey="&cmd.checkUpdatesAll.accesskey;"
+              tooltiptextaddons="&cmd.checkUpdatesAllAddon.tooltip;"
+              tooltiptextthemes="&cmd.checkUpdatesAllTheme.tooltip;"
+              tooltiptextplugins="&cmd.checkUpdatesAllPlugin.tooltip;"
+              command="cmd_findAllUpdates"
+              type="menu-button">
+        <menupopup>
+          <menuitem id="utils-autoUpdateDefault"
+                    label="&updates.updateAddonsAutomatically.label;"
+                    accesskey="&updates.updateAddonsAutomatically.accesskey;"
+                    type="checkbox" autocheck="false"
+                    command="cmd_toggleAutoUpdateDefault"/>
+          <menuitem id="utils-resetAddonUpdatesToAutomatic"
+                    label="&updates.resetUpdatesToAutomatic.label;"
+                    accesskey="&updates.resetUpdatesToAutomatic.accesskey;"
+                    command="cmd_resetAddonAutoUpdate"/>
+          <menuitem id="utils-resetAddonUpdatesToManual"
+                    label="&updates.resetUpdatesToManual.label;"
+                    accesskey="&updates.resetUpdatesToManual.accesskey;"
+                    command="cmd_resetAddonAutoUpdate"/>
+        </menupopup>
+      </button>
+      <label id="getMore" class="text-link"
+             onclick="if (event.button == 0) { openURL(this.getAttribute('getMoreURL')); }"
+             valuethemes="&getThemes.label;"
+             valueplugins="&getPlugins.label;"
+             valueextensions="&getExtensions.label;"/>
+
+      <spacer flex="1"/>
+
+      <button id="installUpdatesAllButton" label="&cmd.installUpdatesAll2.label;"
+              accesskey="&cmd.installUpdatesAll2.accesskey;"
+              tooltiptext="&cmd.installUpdatesAll2.tooltip;"
+              command="cmd_installUpdatesAll"/>
+      </hbox>
+
+    </vbox>
+    <hbox id="resizerBox" style="min-width:1px;">
+      <spacer flex="1"/>
+      <resizer dir="bottomend"/>
+    </hbox>
+  </vbox>
+</window>

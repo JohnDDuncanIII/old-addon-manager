@@ -5,7 +5,7 @@
 function toEM(aPane) {
   var theEM = Components.classes["@mozilla.org/appshell/window-mediator;1"]
                         .getService(Components.interfaces.nsIWindowMediator)
-                        .getMostRecentWindow("Addons:Manager");
+                        .getMostRecentWindow("Extension:Manager");
   if (theEM) {
     theEM.focus();
     if (aPane)
@@ -13,7 +13,7 @@ function toEM(aPane) {
     return;
   }
 
-  const EMURL = "chrome://mozapps/content/extensions/extensions.xul";
+  const EMURL = "chrome://oam/content/extensions.xul";
   const EMFEATURES = "all,dialog=no";
   if (aPane)
     window.openDialog(EMURL, "", EMFEATURES, aPane);

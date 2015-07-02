@@ -1,0 +1,63 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+setting, row[unsupported="true"] {
+  display: none;
+}
+
+setting[type="bool"] {
+  display: -moz-box;
+  -moz-binding: url("chrome://oam/content/setting.xml#setting-bool");
+}
+
+setting[type="bool"][localized="true"] {
+  display: -moz-box;
+  -moz-binding: url("chrome://oam/content/setting.xml#setting-localized-bool");
+}
+
+setting[type="bool"]:not([learnmore]) .preferences-learnmore {
+  display: none;
+}
+
+setting[type="boolint"] {
+  display: -moz-box;
+  -moz-binding: url("chrome://oam/content/setting.xml#setting-boolint");
+}
+
+setting[type="integer"] {
+  display: -moz-box;
+  -moz-binding: url("chrome://oam/content/setting.xml#setting-integer");
+}
+
+setting[type="control"] {
+  display: -moz-box;
+  -moz-binding: url("chrome://oam/content/setting.xml#setting-control");
+}
+
+setting[type="string"] {
+  display: -moz-box;
+  -moz-binding: url("chrome://oam/content/setting.xml#setting-string");
+}
+
+setting[type="color"] {
+  display: -moz-box;
+  -moz-binding: url("chrome://oam/content/setting.xml#setting-color");
+}
+
+setting[type="file"],
+setting[type="directory"] {
+  display: -moz-box;
+  -moz-binding: url("chrome://oam/content/setting.xml#setting-path");
+}
+
+setting[type="menulist"] {
+  display: -moz-box;
+  -moz-binding: url("chrome://oam/content/setting.xml#setting-menulist");
+}
+
+setting[type="radio"] {
+  display: -moz-box;
+  -moz-binding: url("chrome://oam/content/setting.xml#setting-radio");
+}
+

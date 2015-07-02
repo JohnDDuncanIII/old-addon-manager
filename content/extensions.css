@@ -1,0 +1,148 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@namespace xhtml "http://www.w3.org/1999/xhtml";
+
+/* HTML link elements do weird things to the layout if they are not hidden */
+xhtml|link {
+  display: none;
+}
+
+#categories {
+  -moz-binding: url("chrome://oam/content/extensions.xml#categories-list");
+}
+
+.category {
+  -moz-binding: url("chrome://oam/content/extensions.xml#category");
+}
+
+.addon[status="installed"] {
+  -moz-box-orient: vertical;
+  -moz-binding: url("chrome://oam/content/extensions.xml#addon-generic");
+}
+
+.addon[status="installing"] {
+  -moz-box-orient: vertical;
+  -moz-binding: url("chrome://oam/content/extensions.xml#addon-installing");
+}
+
+.addon[pending="uninstall"] {
+  -moz-binding: url("chrome://oam/content/extensions.xml#addon-uninstalled");
+}
+
+.addon:not([selected]) .status-control-wrapper {
+  visibility: collapse;
+}
+
+.meta-rating {
+  -moz-binding: url("chrome://oam/content/extensions.xml#rating");
+}
+
+.download-progress, .download-progress[mode="undetermined"] {
+  -moz-binding: url("chrome://oam/content/extensions.xml#download-progress");
+}
+
+.install-status {
+  -moz-binding: url("chrome://oam/content/extensions.xml#install-status");
+}
+
+.text-list {
+  white-space: pre-line;
+  -moz-user-select: element;
+}
+
+#addonitem-popup > menuitem[disabled="true"] {
+  display: none;
+}
+
+#addonitem-popup[addontype="theme"] > #menuitem_enableItem,
+#addonitem-popup[addontype="theme"] > #menuitem_disableItem,
+#addonitem-popup:not([addontype="theme"]) > #menuitem_enableTheme,
+#addonitem-popup:not([addontype="theme"]) > #menuitem_disableTheme {
+  display: none;
+}
+
+.addon:not([notification="warning"]) .warning,
+.addon:not([notification="error"]) .error,
+.addon:not([notification="info"]) .info,
+.addon:not([pending]) .pending,
+.addon:not([upgrade="true"]) .update-postfix,
+.addon[active="true"] .disabled-postfix,
+.addon[pending="install"] .update-postfix,
+.addon[pending="install"] .disabled-postfix {
+  display: none;
+}
+
+#addons-page:not([warning]) #list-view > .global-warning-container {
+  display: none;
+}
+#addon-list .date-updated {
+  display: none;
+}
+
+.view-pane:not(#updates-view) .addon .relnotes-toggle,
+.view-pane:not(#updates-view) .addon .include-update,
+#updates-view .addon .update-notice {
+  display: none;
+}
+
+#addons-page:not([warning]) .global-warning,
+#addons-page:not([warning="safemode"]) .global-warning-safemode,
+#addons-page:not([warning="checkcompatibility"]) .global-warning-checkcompatibility,
+#addons-page:not([warning="updatesecurity"]) .global-warning-updatesecurity {
+  display: none;
+}
+
+/* Plugins aren't yet disabled by safemode (bug 342333),
+   so don't show that warning when viewing plugins. */
+#addons-page[warning="safemode"] .view-pane[type="plugin"] .global-warning-container {
+  display: none;
+}
+
+#addons-page .view-pane:not([type="experiment"]) .experiment-info-container {
+  display: none;
+}
+
+.addon .relnotes {
+  -moz-user-select: text;
+}
+
+/* Elements in unselected richlistitems cannot be focused */
+richlistitem:not([selected]) * {
+  -moz-user-focus: ignore;
+}
+
+#header-search {
+  width: 22em;
+}
+
+#header-utils-btn {
+  -moz-user-focus: normal;
+}
+
+#experiments-learn-more[disabled="true"] {
+  display: none;
+}
+
+#experiments-change-telemetry[disabled="true"] {
+  display: none;
+}
+
+.view-pane[type="experiment"] .error,
+.view-pane[type="experiment"] .warning,
+.view-pane[type="experiment"] .addon:not([pending="uninstall"]) .pending,
+.view-pane[type="experiment"] .disabled-postfix,
+.view-pane[type="experiment"] .update-postfix,
+.view-pane[type="experiment"] .version {
+  display: none;
+}
+
+.view-pane:not([type="experiment"]) .experiment-container {
+  display: none;
+}
+
+.addon[type="experiment"][status="installing"] .experiment-time,
+.addon[type="experiment"][status="installing"] .experiment-state {
+  display: none;
+}
