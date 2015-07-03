@@ -203,22 +203,6 @@
 
           <!-- list view -->
           <vbox id="list-view" flex="1" class="view-pane" align="stretch" tabindex="0">
-            <hbox class="view-header global-info-container experiment-info-container">
-              <hbox class="global-info" flex="1" align="center">
-                <label value="&experiment.info.label;"/>
-                <button id="experiments-learn-more"
-                        label="&experiment.info.learnmore;"
-                        tooltiptext="&experiment.info.learnmore;"
-                        accesskey="&experiment.info.learnmore.accesskey;"
-                        command="cmd_experimentsLearnMore"/>
-                <button id="experiments-change-telemetry"
-                        label="&experiment.info.changetelemetry;"
-                        tooltiptext="&experiment.info.changetelemetry;"
-                        accesskey="&experiment.info.changetelemetry.accesskey;"
-                        command="cmd_experimentsOpenTelemetryPreferences"/>
-                <spacer flex="5000"/> <!-- Necessary to allow the message to wrap. -->
-              </hbox>
-            </hbox>
             <vbox id="addon-list-empty"
                   flex="1" hidden="true">
               <spacer class="alert-spacer-before"/>

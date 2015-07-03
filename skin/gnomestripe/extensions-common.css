@@ -191,12 +191,14 @@
   font-weight: bold;
 }
 
-.description-container {
+.description-container,
+.description-container-multiline {
   -moz-margin-start: 6px;
   -moz-box-align: center;
 }
 
-.description {
+.description,
+.description-multiline {
   margin: 0;
 }
 
@@ -391,14 +393,6 @@ button.button-link:not([disabled="true"]):active:hover {
 
 /*** telemetry experiments ***/
 
-#detail-experiment-container {
-  font-size: 80%;
-  margin-bottom: 1em;
-}
-
-#detail-experiment-bullet-container,
-#detail-experiment-state,
-#detail-experiment-time,
 .experiment-bullet-container,
 .experiment-state,
 .experiment-time {
@@ -406,13 +400,11 @@ button.button-link:not([disabled="true"]):active:hover {
   display: inline-block;
 }
 
-.addon .experiment-bullet,
-#detail-experiment-bullet {
+.addon .experiment-bullet {
   fill: rgb(158, 158, 158);
 }
 
-.addon[active="true"] .experiment-bullet,
-#detail-view[active="true"] #detail-experiment-bullet {
+.addon[active="true"] .experiment-bullet {
   fill: rgb(106, 201, 20);
 }
 

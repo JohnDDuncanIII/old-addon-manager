@@ -4,11 +4,6 @@
 
 @namespace xhtml "http://www.w3.org/1999/xhtml";
 
-/* HTML link elements do weird things to the layout if they are not hidden */
-xhtml|link {
-  display: none;
-}
-
 #categories {
   -moz-binding: url("chrome://oam/content/extensions.xml#categories-list");
 }
@@ -27,7 +22,7 @@ xhtml|link {
   -moz-binding: url("chrome://oam/content/extensions.xml#addon-installing");
 }
 
-.addon[pending="uninstall"] {
+.addon[selected][pending="uninstall"] {
   -moz-binding: url("chrome://oam/content/extensions.xml#addon-uninstalled");
 }
 
@@ -43,11 +38,6 @@ xhtml|link {
   -moz-binding: url("chrome://oam/content/extensions.xml#install-status");
 }
 
-.text-list {
-  white-space: pre-line;
-  -moz-user-select: element;
-}
-
 #addonitem-popup > menuitem[disabled="true"] {
   display: none;
 }
@@ -57,6 +47,11 @@ xhtml|link {
 #addonitem-popup:not([addontype="theme"]) > #menuitem_enableTheme,
 #addonitem-popup:not([addontype="theme"]) > #menuitem_disableTheme {
   display: none;
+}
+
+.addon[type="theme"] .enable,
+.addon:not([type="theme"]) .enable-theme {
+  visibility: collapse;
 }
 
 .addon:not([notification="warning"]) .warning,
@@ -69,7 +64,12 @@ xhtml|link {
   display: none;
 }
 
-.addon:not([selected]) .status-control-wrapper {
+.addon:not([selected]) .control-container {
+  visibility: collapse;
+}
+
+.addon:not([selected]) .description-container-multiline,
+.addon[selected] .description-container {
   visibility: collapse;
 }
 
@@ -78,10 +78,6 @@ xhtml|link {
 }
 
 #updates-view .addon .update-notice {
-  display: none;
-}
-
-#addons-page .view-pane:not([type="experiment"]) .experiment-info-container {
   display: none;
 }
 
@@ -98,17 +94,8 @@ richlistitem:not([selected]) * {
   width: 22em;
 }
 
-#experiments-learn-more[disabled="true"] {
-  display: none;
-}
-
-#experiments-change-telemetry[disabled="true"] {
-  display: none;
-}
-
 .view-pane[type="experiment"] .error,
 .view-pane[type="experiment"] .warning,
-.view-pane[type="experiment"] .addon:not([pending="uninstall"]) .pending,
 .view-pane[type="experiment"] .disabled-postfix,
 .view-pane[type="experiment"] .update-postfix,
 .view-pane[type="experiment"] .version {
