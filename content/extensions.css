@@ -58,9 +58,7 @@
 .addon:not([notification="error"]) .error,
 .addon:not([notification="info"]) .info,
 .addon:not([upgrade="true"]) .update-postfix,
-.addon[active="true"] .disabled-postfix,
-.addon[pending="install"] .update-postfix,
-.addon[pending="install"] .disabled-postfix {
+.addon[pending="install"] .update-postfix {
   display: none;
 }
 
@@ -96,7 +94,6 @@ richlistitem:not([selected]) * {
 
 .view-pane[type="experiment"] .error,
 .view-pane[type="experiment"] .warning,
-.view-pane[type="experiment"] .disabled-postfix,
 .view-pane[type="experiment"] .update-postfix,
 .view-pane[type="experiment"] .version {
   display: none;
@@ -110,3 +107,12 @@ richlistitem:not([selected]) * {
 .addon[type="experiment"][status="installing"] .experiment-state {
   display: none;
 }
+
+.addon-control[disabled="true"]:not(.no-auto-hide) {
+  display: none;
+}
+
+.no-auto-hide .addon-control {
+  display: block !important;
+}
+
