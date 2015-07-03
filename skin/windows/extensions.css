@@ -4,13 +4,29 @@
 
 /*** category selector ***/
 #categories {
-  margin: 8px 8px 0;
+  -moz-appearance: none;
+  margin: 0px;
+  border-bottom: 2px groove ThreeDFace;
+  background-color: -moz-Field;
+  color: -moz-FieldText;
+  -moz-padding-start: 10px;
 }
 
 .category {
+  -moz-appearance: none;
+  margin: 0px 1px 0px 1px;
+  padding: 5px 3px 1px;
   min-width: 4.5em;
-  margin: 0;
-  padding: 3px;
+}
+
+.category:hover {
+  background-color: #E0E8F6;
+  color: black;
+}
+
+.category[selected="true"] {
+  background-color: #C1D2EE;
+  color: black;
 }
 
 .category[disabled] {
@@ -54,23 +70,13 @@
 }
 
 /*** global notification ***/
-notification {
-  background-color: transparent;
-}
-
-.notification-inner {
-  background-color: infobackground;
-  border-color: ThreeDShadow;
-  margin: 9px 8px 0 8px;
-}
-
 notification[value="pending"] .messageImage {
-  list-style-image: url("moz-icon://stock/gtk-dialog-info?size=menu");
+  list-style-image: url("chrome://global/skin/icons/information-16.png");
 }
 
 /*** viewport ***/
 #view-port {
-  margin: 10px 8px 0 8px;
+  margin: 10px 10px 0px 10px;
   min-width: 1px;
 }
 
