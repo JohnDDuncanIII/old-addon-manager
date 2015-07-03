@@ -524,7 +524,6 @@
                 <xul:label anonid="name" class="name" crop="end" flex="1"
                            xbl:inherits="value=name,tooltiptext=name"/>
                 <xul:label anonid="version" class="version"/>
-                <xul:label class="disabled-postfix" value="&addon.disabled.postfix;"/>
                 <xul:label class="update-postfix" value="&addon.update.postfix;"/>
                 <xul:spacer flex="5000"/> <!-- Necessary to make the name crop -->
               </xul:hbox>
@@ -915,7 +914,6 @@
               this._warningBtn.setAttribute("oncommand", "document.getBindingParent(this).retryInstall();");
               this._warningBtn.hidden = false;
               this._warningLink.hidden = true;
-              dump("install && install.state == AddonManager.STATE_DOWNLOAD_FAILED\n");
             } else if (install && install.state == AddonManager.STATE_INSTALL_FAILED) {
               this.setAttribute("notification", "warning");
               this._warning.textContent = gStrings.ext.formatStringFromName(
@@ -927,7 +925,6 @@
               this._warningBtn.setAttribute("oncommand", "document.getBindingParent(this).retryInstall();");
               this._warningBtn.hidden = false;
               this._warningLink.hidden = true;
-              dump("install && install.state == AddonManager.STATE_INSTALL_FAILED\n");
             } else if (!isUpgrade && this.mAddon.blocklistState == Ci.nsIBlocklistService.STATE_BLOCKED) {
               this.setAttribute("notification", "error");
               this._error.textContent = gStrings.ext.formatStringFromName(
@@ -937,7 +934,6 @@
               this._errorLink.value = gStrings.ext.GetStringFromName("notification.blocked.link");
               this._errorLink.href = this.mAddon.blocklistURL;
               this._errorLink.hidden = false;
-              dump("!isUpgrade && this.mAddon.blocklistState == Ci.nsIBlocklistService.STATE_BLOCKED\n");
             } else if (!isUpgrade &&
                        this.mAddon.signedState <= AddonManager.SIGNEDSTATE_MISSING) {
               this.setAttribute("notification", this.mAddon.appDisabled ? "error" : "warning");
@@ -950,7 +946,6 @@
               infoLink.value = gStrings.ext.GetStringFromName("notification.unsigned.link");
               infoLink.href = Services.urlFormatter.formatURLPref("app.support.baseURL") + "unsigned-addons";
               infoLink.hidden = false;
-              dump("!isUpgrade && this.mAddon.signedState <= AddonManager.SIGNEDSTATE_MISSING\n");
             } else if ((!isUpgrade && !this.mAddon.isCompatible) && (AddonManager.checkCompatibility
             || (this.mAddon.blocklistState != Ci.nsIBlocklistService.STATE_SOFTBLOCKED))) {
               this.setAttribute("notification", "warning");
@@ -960,7 +955,6 @@
               );
               this._warningLink.hidden = true;
               this._warningBtn.hidden = true;
-              dump("(!isUpgrade && !this.mAddon.isCompatible) && (AddonManager.checkCompatibility || (this.mAddon.blocklistState != Ci.nsIBlocklistService.STATE_SOFTBLOCKED))\n");
             } else if (!isUpgrade && this.mAddon.blocklistState == Ci.nsIBlocklistService.STATE_SOFTBLOCKED) {
               this.setAttribute("notification", "warning");
               this._warning.textContent = gStrings.ext.formatStringFromName(
@@ -971,7 +965,6 @@
               this._warningLink.href = this.mAddon.blocklistURL;
               this._warningLink.hidden = false;
               this._warningBtn.hidden = true;
-              dump("!isUpgrade && this.mAddon.blocklistState == Ci.nsIBlocklistService.STATE_SOFTBLOCKED\n");
             } else if (!isUpgrade && this.mAddon.blocklistState == Ci.nsIBlocklistService.STATE_OUTDATED) {
               this.setAttribute("notification", "warning");
               this._warning.textContent = gStrings.ext.formatStringFromName(
@@ -982,7 +975,6 @@
               this._warningLink.href = Services.urlFormatter.formatURLPref("plugins.update.url");
               this._warningLink.hidden = false;
               this._warningBtn.hidden = true;
-              dump("!isUpgrade && this.mAddon.blocklistState == Ci.nsIBlocklistService.STATE_OUTDATED\n");
             } else if (!isUpgrade && this.mAddon.blocklistState == Ci.nsIBlocklistService.STATE_VULNERABLE_UPDATE_AVAILABLE) {
               this.setAttribute("notification", "error");
               this._error.textContent = gStrings.ext.formatStringFromName(
@@ -992,7 +984,6 @@
               this._errorLink.value = gStrings.ext.GetStringFromName("notification.vulnerableUpdatable.link");
               this._errorLink.href = this.mAddon.blocklistURL;
               this._errorLink.hidden = false;
-              dump("!isUpgrade && this.mAddon.blocklistState == Ci.nsIBlocklistService.STATE_VULNERABLE_UPDATE_AVAILABLE\n");
             } else if (!isUpgrade && this.mAddon.blocklistState == Ci.nsIBlocklistService.STATE_VULNERABLE_NO_UPDATE) {
               this.setAttribute("notification", "error");
               this._error.textContent = gStrings.ext.formatStringFromName(
@@ -1002,17 +993,14 @@
               this._errorLink.value = gStrings.ext.GetStringFromName("notification.vulnerableNoUpdate.link");
               this._errorLink.href = this.mAddon.blocklistURL;
               this._errorLink.hidden = false;
-              dump("!isUpgrade && this.mAddon.blocklistState == Ci.nsIBlocklistService.STATE_VULNERABLE_NO_UPDATE\n");
             } else if (this.mAddon.isGMPlugin && !this.mAddon.isInstalled &&
                        this.mAddon.isActive) {
               this.setAttribute("notification", "warning");
               this._warning.textContent =
                 gStrings.ext.formatStringFromName("notification.gmpPending",
                                                   [this.mAddon.name], 1);
-              dump("this.mAddon.isGMPlugin && !this.mAddon.isInstalled && this.mAddon.isActive\n");
             } else {
               this.removeAttribute("notification");
-              dump("ELSE\n");
             }
           }
 
@@ -1373,7 +1361,6 @@
                 <xul:label anonid="name" class="name" crop="end" flex="1"
                            xbl:inherits="value=name,tooltiptext=name"/>
                 <xul:label anonid="version" class="version"/>
-                <xul:label class="disabled-postfix" value="&addon.disabled.postfix;"/>
                 <xul:label class="update-postfix" value="&addon.update.postfix;"/>
                 <xul:spacer flex="5000"/> <!-- Necessary to make the name crop -->
               </xul:hbox>

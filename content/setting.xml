@@ -6,6 +6,8 @@
 <!DOCTYPE page [
 <!ENTITY % extensionsDTD SYSTEM "chrome://mozapps/locale/extensions/extensions.dtd">
 %extensionsDTD;
+<!ENTITY % extensionsCompatDTD SYSTEM "chrome://oam/locale/extensions2.dtd">
+%extensionsCompatDTD;
 ]>
 
 <bindings xmlns="http://www.mozilla.org/xbl"
