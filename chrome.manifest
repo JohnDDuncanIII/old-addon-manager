@@ -1,5 +1,5 @@
 content $NAME content/
-skin $NAME classic/1.0 skin/gnomestripe/
+skin $NAME classic/1.0 skin/unix/
 locale $NAME en-US     locale/en-US/
 
 overlay chrome://communicator/content/tasksOverlay.xul         chrome://$NAME/content/appOverlay.xul application=$SM_ID
