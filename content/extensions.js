@@ -109,6 +109,7 @@ function initialize(event) {
   gCategories.initialize();
   gEventManager.initialize();
   gCommandBar.initialize();
+  gNotificationHandler.initialize();
   Services.obs.addObserver(sendEMPong, "EM-ping", false);
   Services.obs.notifyObservers(window, "EM-loaded", "");
 
@@ -575,6 +576,7 @@ var gViewController = {
     var event = document.createEvent("Events");
     event.initEvent("ViewChanged", true, true);
     this.currentViewObj.node.dispatchEvent(event);
+    this.currentViewObj.initialSelect();
   },
 
   commands: {
@@ -1728,6 +1730,7 @@ var gSearchView = {
         for (let element of elements)
           self._listBox.insertBefore(element, self._listBox.lastChild);
         self.updateListAttributes();
+        self.initialSelect();
       }
 
       self._pendingSearches--;
@@ -1896,6 +1899,10 @@ var gSearchView = {
         return;
       }
     }
+  },
+
+  initialSelect: function gSearchView_initialSelect() {
+    this._listBox.selectedIndex = 0;
   },
 
   getSelectedAddon: function gSearchView_getSelectedAddon() {
@@ -2093,6 +2100,10 @@ var gListView = {
         return;
       }
     }
+  },
+
+  initialSelect: function gListView_initialSelect() {
+    this._listBox.selectedIndex = 0;
   },
 
   getSelectedAddon: function gListView_getSelectedAddon() {
@@ -2342,6 +2353,10 @@ var gUpdatesView = {
     this._updateSelected.disabled = true;
   },
 
+  initialSelect: function gUpdatesView_initialSelect() {
+    this._listBox.selectedIndex = 0;
+  },
+
   getSelectedAddon: function gUpdatesView_getSelectedAddon() {
     var item = this._listBox.selectedItem;
     if (item)
@@ -2517,3 +2532,47 @@ var gCommandBar = {
     this._hideUpdateInfoButton.hidden = !aShow;
   }
 };
+
+
+var gNotificationHandler = {
+  node: null,
+  _pendingAddons: null,
+
+  initialize: function gNH_initialize() {
+    this.node = document.getElementById("notifications-container");
+    this._pendingAddons = [];
+  },
+
+  addPendingAddon: function gNH_addPendingAddon(aAddon) {
+    if (aAddon in this._pendingAddons)
+      return;
+    this._pendingAddons.push(aAddon);
+
+    var pendingNotification = this.node.getNotificationWithValue("pending");
+    if (!pendingNotification) {
+      var appname = gStrings.brandShortName;
+      var message = gStrings.oldext.formatStringFromName("restartMessage", [appname], 1);
+      var buttons = [ { label: gStrings.oldext.formatStringFromName("restartButton", [appname], 1),
+                        accessKey: gStrings.oldext.GetStringFromName("restartAccessKey"),
+                        callback: this.restartApp } ];
+      this.node.appendNotification(message, "pending", null,
+                                   this.node.PRIORITY_WARNING_HIGH, buttons);
+     }
+  },
+
+  removePendingAddon: function gNH_removePendingAddon(aAddon) {
+    var i = this._pendingAddons.indexOf(aAddon);
+    if (i == -1)
+      return;
+    this._pendingAddons.splice(i, 1);
+
+    var pendingNotification = this.node.getNotificationWithValue("pending");
+    if (this._pendingAddons.length == 0 && pendingNotification)
+      this.node.removeNotification(pendingNotification);
+  },
+
+  restartApp: function gVC_restartApp(aNotification, aButton) {
+    gViewController.commands["cmd_restartApp"].doCommand();
+  }
+};
+

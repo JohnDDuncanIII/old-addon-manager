@@ -62,7 +62,6 @@ xhtml|link {
 .addon:not([notification="warning"]) .warning,
 .addon:not([notification="error"]) .error,
 .addon:not([notification="info"]) .info,
-.addon:not([pending]) .pending,
 .addon:not([upgrade="true"]) .update-postfix,
 .addon[active="true"] .disabled-postfix,
 .addon[pending="install"] .update-postfix,

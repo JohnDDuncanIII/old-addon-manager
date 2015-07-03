@@ -11,7 +11,6 @@
 
 .warning-icon,
 .error-icon,
-.pending-icon,
 .info-icon {
   width: 16px;
   margin: 3px 0;
@@ -202,7 +201,6 @@
 }
 
 .warning,
-.pending,
 .error {
   font-weight: bold;
   -moz-box-align: center;
@@ -236,15 +234,6 @@
 
 .addon-view .error {
   color: #d74345;
-}
-
-.addon-view .pending {
-  color: #1b7123;
-}
-
-.addon-view[pending="disable"] .pending,
-.addon-view[pending="uninstall"] .pending {
-  color: #62666e;
 }
 
 .addon .relnotes-container {
@@ -291,23 +280,6 @@
   background-image: url("chrome://mozapps/skin/extensions/stripes-error.png"),
                     linear-gradient(rgba(255, 0, 0, 0.04),
                                     rgba(255, 0, 0, 0));
-  background-repeat: repeat-x;
-}
-
-.addon-view[pending="enable"],
-.addon-view[pending="upgrade"],
-.addon-view[pending="install"] {
-  background-image: url("chrome://mozapps/skin/extensions/stripes-info-positive.png"),
-                    linear-gradient(rgba(0, 255, 0, 0.04),
-                                    rgba(0, 255, 0, 0));
-  background-repeat: repeat-x;
-}
-
-.addon-view[pending="disable"],
-.addon-view[pending="uninstall"] {
-  background-image: url("chrome://mozapps/skin/extensions/stripes-info-negative.png"),
-                    linear-gradient(rgba(128, 128, 128, 0.04),
-                                    rgba(128, 128, 128, 0));
   background-repeat: repeat-x;
 }
 

@@ -513,19 +513,6 @@
         <xul:label anonid="error-link" class="text-link"/>
         <xul:spacer flex="5000"/> <!-- Necessary to allow the message to wrap -->
       </xul:hbox>
-      <xul:hbox anonid="pending-container"
-                class="pending">
-        <xul:image class="pending-icon"/>
-        <xul:label anonid="pending" flex="1"/>
-        <xul:button anonid="restart-btn" class="button-link"
-                    label="&addon.restartNow.label;"
-                    oncommand="document.getBindingParent(this).restart();"/>
-        <xul:button anonid="undo-btn" class="button-link"
-                    label="&addon.undoAction.label;"
-                    tooltipText="&addon.undoAction.tooltip;"
-                    oncommand="document.getBindingParent(this).undo();"/>
-        <xul:spacer flex="5000"/> <!-- Necessary to allow the message to wrap -->
-      </xul:hbox>
 
       <xul:vbox class="content-container" align="start">
        <xul:hbox align="center">
@@ -682,14 +669,6 @@
       <field name="_errorLink">
         document.getAnonymousElementByAttribute(this, "anonid",
                                                 "error-link");
-      </field>
-      <field name="_pendingContainer">
-        document.getAnonymousElementByAttribute(this, "anonid",
-                                                "pending-container");
-      </field>
-      <field name="_pending">
-        document.getAnonymousElementByAttribute(this, "anonid",
-                                                "pending");
       </field>
       <field name="_infoContainer">
         document.getAnonymousElementByAttribute(this, "anonid",
@@ -901,13 +880,11 @@
                 pending = op;
             }
 
+            gNotificationHandler.addPendingAddon(this);
             this.setAttribute("pending", pending);
-            this._pending.textContent = gStrings.ext.formatStringFromName(
-              "notification." + pending,
-              [this.mAddon.name, gStrings.brandShortName], 2
-            );
           } else {
             this.removeAttribute("pending");
+            gNotificationHandler.removePendingAddon(this);
 
             var isUpgrade = this.hasAttribute("upgrade");
             var install = this._installStatus.mInstall;
@@ -1142,6 +1119,7 @@
             this.mAddon.userDisabled = true;
 
             // This won't update any other add-on manager views (bug 582002)
+            gNotificationHandler.addPendingAddon(this);
             this.setAttribute("pending", "uninstall");
           } else {
             this.mAddon.uninstall();
@@ -1347,7 +1325,7 @@
           if (event.originalTarget.localName != 'button' &&
               !event.originalTarget.classList.contains('text-link') &&
               event.originalTarget == this._lastClickTarget) {
-              //double click!
+              gViewController.doCommand("cmd_showItemPreferences", this.mAddon);
           }
           break;
         }
@@ -1359,21 +1337,6 @@
   <!-- Addon - uninstalled - An uninstalled addon that can be re-installed. -->
   <binding id="addon-uninstalled"
            extends="chrome://oam/content/extensions.xml#addon-base">
-    <content>
-      <xul:hbox class="pending">
-        <xul:image class="pending-icon"/>
-        <xul:label anonid="notice" flex="1"/>
-        <xul:button anonid="restart-btn" class="button-link"
-                    label="&addon.restartNow.label;"
-                    command="cmd_restartApp"/>
-        <xul:button anonid="undo-btn" class="button-link"
-                    label="&addon.undoRemove.label;"
-                    tooltiptext="&addon.undoRemove.tooltip;"
-                    oncommand="document.getBindingParent(this).cancelUninstall();"/>
-        <xul:spacer flex="5000"/> <!-- Necessary to allow the message to wrap -->
-      </xul:hbox>
-    </content>
-
     <implementation>
       <constructor><![CDATA[
         this._notice.textContent = gStrings.ext.formatStringFromName("uninstallNotice",
@@ -1409,13 +1372,16 @@
             this.mAddon.userDisabled = false;
 
           this.removeAttribute("pending");
+          gNotificationHandler.removePendingAddon(this);
         ]]></body>
       </method>
 
       <method name="onOperationCancelled">
         <body><![CDATA[
-          if (!this.isPending("uninstall"))
+          if (!this.isPending("uninstall")) {
             this.removeAttribute("pending");
+            gNotificationHandler.removePendingAddon(this);
+          }
         ]]></body>
       </method>
 
@@ -1437,6 +1403,7 @@
             this.mAddon = aAddon;
 
           this.removeAttribute("pending");
+          gNotificationHandler.removePendingAddon(this);
         ]]></body>
       </method>
 
@@ -1459,6 +1426,7 @@
             this.mAddon = aAddon;
 
           this.removeAttribute("pending");
+          gNotificationHandler.removePendingAddon(this);
         ]]></body>
       </method>
     </implementation>

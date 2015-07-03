@@ -156,6 +156,7 @@
                     disabled="true"/>
     </richlistbox>
     <vbox class="main-content" flex="1">
+      <notificationbox id="notifications-container" flex="1">
         <!-- view port -->
         <deck id="view-port" flex="1" selectedIndex="0">
 
@@ -288,6 +289,7 @@
             </hbox>
           </vbox>
         </deck>
+      </notificationbox>
 
       <!-- main header -->
       <hbox id="command-bar" align="center">
