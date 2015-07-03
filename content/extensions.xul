@@ -190,7 +190,7 @@
               <hbox id="search-recommended-header" pack="start">
                 <label value="&recommendedHeader.label;" />
               </hbox>
-              <hbox align="center">
+              <hbox id="search-footer" align="center">
                 <label id="search-allresults-link" class="text-link"/>
                 <spacer flex="1" />
                 <label id="search-allrecommended-link" class="text-link"
