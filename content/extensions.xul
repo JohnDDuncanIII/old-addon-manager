@@ -212,7 +212,7 @@
               <spacer class="alert-spacer-after"/>
             </vbox>
             <hbox flex="1"> 
-              <richlistbox id="addon-list" class="list" flex="1"/>
+              <richlistbox id="addon-list" class="list" flex="1" persist="width"/>
               <splitter id="themeSplitter" hidden="true" collapse="none" persist="state"/>
               <vbox id="themePreviewArea" hidden="true" width="220" flex="1" persist="width">
                 <deck id="previewImageDeck" flex="1">
@@ -251,7 +251,7 @@
                       tooltiptext="&updates.updateSelected.tooltip;"/>
             </hbox>
             <hbox flex="1"> 
-            <richlistbox id="updates-list" class="list" flex="1"/>
+            <richlistbox id="updates-list" class="list" flex="1" persist="width"/>
               <splitter id="relNotesSplitter" hidden="true" collapse="none" persist="state"/>
               <vbox id="relNotesArea" hidden="true" width="220" flex="1" persist="width">
                 <deck id="infoDeck" flex="1">
