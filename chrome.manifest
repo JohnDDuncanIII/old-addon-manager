@@ -1,9 +1,9 @@
-content oam content/
-skin oam classic/1.0 skin/unix/
-skin oam classic/1.0 skin/windows/ os=WINNT osversion<6
-skin oam classic/1.0 skin/windows-aero/ os=WINNT osversion>=6
-locale oam en-US     locale/en-US/
+content $NAME content/
+skin $NAME classic/1.0 skin/unix/
+skin $NAME classic/1.0 skin/windows/ os=WINNT osversion<6
+skin $NAME classic/1.0 skin/windows-aero/ os=WINNT osversion>=6
+locale $NAME en-US     locale/en-US/
 
-overlay chrome://communicator/content/tasksOverlay.xul         chrome://oam/content/appOverlay.xul application={92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}
-overlay chrome://browser/content/browser.xul                   chrome://oam/content/appOverlay.xul application={ec8030f7-c20a-464f-9b0e-13a3a9e97384}
-overlay chrome://messenger/content/baseMenuOverlay.xul         chrome://oam/content/appOverlay.xul application={3550f703-e582-4d05-9a08-453d09bdfdc6}
+overlay chrome://communicator/content/tasksOverlay.xul         chrome://$NAME/content/appOverlay.xul application=$SM_ID
+overlay chrome://browser/content/browser.xul                   chrome://$NAME/content/appOverlay.xul application=$FX_ID
+overlay chrome://messenger/content/baseMenuOverlay.xul         chrome://$NAME/content/appOverlay.xul application=$TB_ID
