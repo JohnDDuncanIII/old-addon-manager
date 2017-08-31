@@ -588,9 +588,9 @@
                         label="&cmd.showPreferencesUnix.label;"
                         tooltiptext="&cmd.showPreferencesUnix.tooltip;"
                         oncommand="document.getBindingParent(this).showPreferences();"/>
-            <xul:button anonid="debug-btn" class="addon-control debug"
+            <!--<xul:button anonid="debug-btn" class="addon-control debug"
                         label="&cmd.debugAddon.label;"
-                        oncommand="document.getBindingParent(this).debug();"/>
+                        oncommand="document.getBindingParent(this).debug();"/>-->
             <xul:button anonid="enable-theme-btn"  class="addon-control enable-theme"
                         label="&cmd.enableTheme.label;"
                         oncommand="document.getBindingParent(this).userDisabled = false;"/>
@@ -859,21 +859,15 @@
 
       <method name="_updateDates">
         <body><![CDATA[
-          function formatDate(aDate) {
-            return Cc["@mozilla.org/intl/scriptabledateformat;1"]
-                     .getService(Ci.nsIScriptableDateFormat)
-                     .FormatDate("",
-                                 Ci.nsIScriptableDateFormat.dateFormatLong,
-                                 aDate.getFullYear(),
-                                 aDate.getMonth() + 1,
-                                 aDate.getDate()
-                                 );
-          }
+        function formatDate(aDate) {
+        const dtOptions = { year: "numeric", month: "long", day: "numeric" };
+        return aDate.toLocaleDateString(undefined, dtOptions);
+        }
 
-          if (this.mAddon.updateDate)
-            this._dateUpdated.value = formatDate(this.mAddon.updateDate);
-          else
-            this._dateUpdated.value = this._dateUpdated.getAttribute("unknown");
+        if (this.mAddon.updateDate)
+        this._dateUpdated.value = formatDate(this.mAddon.updateDate);
+        else
+        this._dateUpdated.value = this._dateUpdated.getAttribute("unknown");
         ]]></body>
       </method>
 
@@ -1070,7 +1064,7 @@
                            Services.prefs.getBoolPref('devtools.chrome.enabled') &&
                            Services.prefs.getBoolPref('devtools.debugger.remote-enabled');
 
-          this._debugBtn.disabled = this._debugBtn.hidden = !debuggable
+          //this._debugBtn.disabled = this._debugBtn.hidden = !debuggable
 
           if (this.mAddon.type == "experiment") {
             this.removeAttribute("notification");
